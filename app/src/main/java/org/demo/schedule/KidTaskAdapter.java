@@ -1,0 +1,50 @@
+package org.demo.schedule;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
+public class KidTaskAdapter extends RecyclerView.Adapter<KidTaskAdapter.ViewHolder> {
+
+    private ArrayList<Tache> taskList;
+
+    public KidTaskAdapter(ArrayList<Tache> taskList) {
+        this.taskList = taskList;
+    }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup vg, int viewType) {
+        View v = LayoutInflater.from(vg.getContext()).inflate(R.layout.row_schedule, vg, false);
+        return new KidTaskAdapter.ViewHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Tache tache = taskList.get(position);
+        holder.txt_tache.setText(tache.getNom_tache());
+    }
+
+    @Override
+    public int getItemCount() {
+        return taskList.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView txt_tache;
+        View root;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            root = itemView.findViewById(R.id.root);
+            txt_tache = itemView.findViewById(R.id.txt_tache);
+        }
+    }
+
+}
