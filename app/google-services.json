@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "926062162065",
+    "firebase_url": "https://schedule-ede2e.firebaseio.com",
+    "project_id": "schedule-ede2e",
+    "storage_bucket": "schedule-ede2e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:926062162065:android:739dd936ae0b0b844c0f30",
+        "android_client_info": {
+          "package_name": "org.demo.schedule"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "926062162065-8q8ndb76m976k4bgo680ogc2oit0m10e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiHG6GD6Blw0xmoP6QefjnJIoVqonQyyE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "926062162065-8q8ndb76m976k4bgo680ogc2oit0m10e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
