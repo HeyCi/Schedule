@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class KidSchedule extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView rw_sched;
-    ArrayList<Tache> taskList;
+    ArrayList<Task> taskList;
     KidTaskAdapter adapter;
     Button btn_next;
 
@@ -36,7 +36,7 @@ public class KidSchedule extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        Tache tache = new Tache("mettre ses chaussures");
+        Task tache = new Task("mettre ses chaussures");
         taskList.add(0, tache);
         Toast.makeText(this, "ajout de ma tache", Toast.LENGTH_LONG).show();
         adapter.notifyDataSetChanged();
