@@ -8,9 +8,35 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+interface OnGetDataListener {
+    void onSuccess(DataSnapshot dataSnapshot);
+    void onStart();
+    void onFailure();
+}
+
 public class Database {
     private final FirebaseDatabase database;
     private final DatabaseReference userRef;
+
+    public DatabaseReference getUserRef() {
+        return userRef;
+    }
+
+    public void readData(DatabaseReference ref, final OnGetDataListener listener) {
+        listener.onStart();
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                listener.onSuccess(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError firebaseError) {
+                listener.onFailure();
+            }
+        });
+
+    }
 
     public void CreateUserParent(User user){
         userRef.child(user.getPhoneNumber()).child("FirstName").setValue(user.getFirstName());
@@ -73,11 +99,10 @@ public class Database {
         });
         return userToSend;
     }
-
-
-
     public Database() {
         database =  FirebaseDatabase.getInstance();
         userRef = database.getReference("User");
     }
 }
+
+

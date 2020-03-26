@@ -8,6 +8,7 @@ public class Task {
     private LocalTime recurrence;
     private LocalTime hour;
     private int numberOfReminder;
+    private LocalTime reminderInterval;
     private String type;
     private String childId;
     private String dayOfTheWeek;
@@ -42,6 +43,14 @@ public class Task {
 
     public String getDayOfTheWeek() {
         return dayOfTheWeek;
+    }
+
+    public LocalTime getReminderInterval() {
+        return reminderInterval;
+    }
+
+    public void setReminderInterval(LocalTime reminderInterval) {
+        this.reminderInterval = reminderInterval;
     }
 
     public void setName_task(String name_task) {
@@ -80,12 +89,13 @@ public class Task {
         this.name_task = nom_task;
     }
 
-    public Task(String nom_task, LocalTime duration, LocalTime recurrence, LocalTime hour, int numberOfReminder, String type, String childId, String dayOfTheWeek) {
+    public Task(String nom_task, LocalTime duration, LocalTime recurrence, LocalTime hour, int numberOfReminder, LocalTime reminderInterval,String type, String childId, String dayOfTheWeek) {
         this.name_task = nom_task;
         this.duration = duration;
         this.recurrence = recurrence;
         this.hour = hour;
         this.numberOfReminder = numberOfReminder;
+        this.reminderInterval = reminderInterval;
         this.type = type;
         this.childId = childId;
         this.dayOfTheWeek = dayOfTheWeek;
