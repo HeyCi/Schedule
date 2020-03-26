@@ -28,7 +28,7 @@ public class KidTaskAdapter extends RecyclerView.Adapter<KidTaskAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Task tache = taskList.get(position);
-        holder.txt_tache.setText(tache.getNom_task());
+        holder.txt_tache.setText(tache.getName_task());
     }
 
     @Override
