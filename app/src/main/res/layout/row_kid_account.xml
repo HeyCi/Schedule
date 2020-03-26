@@ -1,22 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_row"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/txt_title_account"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Création du compte" />
-
-    <TextView
-        android:id="@+id/txt_parent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Compte Parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,7 +16,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txt_lastname"
+                android:id="@+id/txt_lastname_kid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -37,45 +24,43 @@
                 android:text="Nom" />
 
             <TextView
-                android:id="@+id/txt_firstname"
+                android:id="@+id/txt_firstname_kid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Prenom" />
+                android:text="Prénom" />
 
             <TextView
-                android:id="@+id/txt_phone"
+                android:id="@+id/txt_phone_kid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="Téléphone" />
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="2"
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/et_lastname_parent"
+                android:id="@+id/et_lastname_kid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/et_firstname_parent"
+                android:id="@+id/et_firstname_kid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/et_phone_parent"
+                android:id="@+id/et_phone_kid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -83,21 +68,11 @@
         </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_add_kid"
+    <TextView
+        android:id="@+id/txt_enfant"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ajouter un enfant" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
-
-    <Button
-        android:id="@+id/btn_create_accounts"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Créer la famille" />
+        android:gravity="center"
+        android:text="Compte enfant" />
 
 </LinearLayout>
