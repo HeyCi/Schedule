@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -27,9 +28,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_ac.setOnClickListener(this);
         btn_sg.setOnClickListener(this);
 
+        User userTest = new User("nametest", "lastNametest", "0659025247","Parent");
+        User userChildTest = new User("child", "lastChild", "0659025246","Enfant", "0659025247");
+        Database db = new Database();
+        db.GetUser(userTest.getPhoneNumber());
         /*User userTest = new User("nametest", "lastNametest", "0659025247","Parent");
         User userChildTest = new User("child", "lastChild", "0659025246","Enfant", "0659025247");
         Database db = new Database();
+        db.GetUser(userTest.getPhoneNumber());
         db.CreateUserParent(userTest);
         db.CreateUserChild(userChildTest);
         Task taskTest = new Task("taskTest", null, null, null, 5, "Quotidienne","0659025246","LMMJVSD");

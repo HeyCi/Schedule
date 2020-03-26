@@ -3,7 +3,7 @@ package org.demo.schedule;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,7 +28,6 @@ public class KidAccountAdapter extends RecyclerView.Adapter<KidAccountAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         User user = kidList.get(position);
-        // holder.txt_tache.setText(user.getNom_task());
     }
 
     @Override
@@ -36,12 +35,20 @@ public class KidAccountAdapter extends RecyclerView.Adapter<KidAccountAdapter.Vi
         return kidList.size();
     }
 
+    public ArrayList<User> getKids() { return kidList; }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         View layout_row;
+        EditText et_firstname_kid;
+        EditText et_lastname_kid;
+        EditText et_phone_kid;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             layout_row = itemView.findViewById(R.id.layout_row);
+            et_firstname_kid = itemView.findViewById(R.id.et_firstname_kid);
+            et_lastname_kid = itemView.findViewById(R.id.et_lastname_kid);
+            et_phone_kid = itemView.findViewById(R.id.et_phone_kid);
         }
     }
 

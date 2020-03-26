@@ -1,44 +1,66 @@
 package org.demo.schedule;
 
 public class User {
-    private String FirstName;
-    private String LastName;
-    private String PhoneNumber;
-    private String Type;
-    private String Parent;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+    private String type;
+    private String parent;
 
     public String getFirstName() {
-        return FirstName;
+        return firstName;
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public String getPhoneNumber() {
-        return PhoneNumber;
+        return phoneNumber;
     }
 
     public String getType() {
-        return Type;
+        return type;
     }
 
-    public String getParent() {
-        return Parent;
+    public String getParent() { return parent; }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setParent(String parent) {
+        this.parent = parent;
     }
 
     public User(String firstName, String lastName, String phoneNumber, String type) {
-        FirstName = firstName;
-        LastName = lastName;
-        PhoneNumber = phoneNumber;
-        Type = type;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.type = type;
     }
 
     public User(String firstName, String lastName, String phoneNumber, String type, String parent) {
-        FirstName = firstName;
-        LastName = lastName;
-        PhoneNumber = phoneNumber;
-        Type = type;
-        Parent = parent;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.type = type;
+        this.parent = parent;
+    }
+
+    public User(){
+
     }
 }
