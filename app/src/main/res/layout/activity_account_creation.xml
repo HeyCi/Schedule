@@ -92,13 +92,21 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rw_kidaccount"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_height="wrap_content" >
 
-    <Button
-        android:id="@+id/btn_create_accounts"
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Créer la famille" />
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_create_accounts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Créer la famille" />
+    </LinearLayout>
 
 </LinearLayout>
