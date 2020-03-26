@@ -10,40 +10,38 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class KidTaskAdapter extends RecyclerView.Adapter<KidTaskAdapter.ViewHolder> {
+public class KidAccountAdapter extends RecyclerView.Adapter<KidAccountAdapter.ViewHolder> {
 
-    private ArrayList<Task> taskList;
+    private ArrayList<User> kidList;
 
-    public KidTaskAdapter(ArrayList<Task> taskList) {
-        this.taskList = taskList;
+    public KidAccountAdapter(ArrayList<User> kidList) {
+        this.kidList = kidList;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup vg, int viewType) {
-        View v = LayoutInflater.from(vg.getContext()).inflate(R.layout.row_schedule, vg, false);
-        return new KidTaskAdapter.ViewHolder(v);
+        View v = LayoutInflater.from(vg.getContext()).inflate(R.layout.row_kid_account, vg, false);
+        return new KidAccountAdapter.ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Task tache = taskList.get(position);
-        holder.txt_tache.setText(tache.getName_task());
+        User user = kidList.get(position);
+        // holder.txt_tache.setText(user.getNom_task());
     }
 
     @Override
     public int getItemCount() {
-        return taskList.size();
+        return kidList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txt_tache;
-        View root;
+        View layout_row;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            root = itemView.findViewById(R.id.root);
-            txt_tache = itemView.findViewById(R.id.txt_tache);
+            layout_row = itemView.findViewById(R.id.layout_row);
         }
     }
 
