@@ -81,5 +81,3 @@ public class Database {
         userRef = database.getReference("User");
     }
 }
-
-

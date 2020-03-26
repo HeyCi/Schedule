@@ -44,6 +44,38 @@ public class Task {
         return dayOfTheWeek;
     }
 
+    public void setName_task(String name_task) {
+        this.name_task = name_task;
+    }
+
+    public void setDuration(LocalTime duration) {
+        this.duration = duration;
+    }
+
+    public void setRecurrence(LocalTime recurrence) {
+        this.recurrence = recurrence;
+    }
+
+    public void setHour(LocalTime hour) {
+        this.hour = hour;
+    }
+
+    public void setNumberOfReminder(int numberOfReminder) {
+        this.numberOfReminder = numberOfReminder;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setChildId(String childId) {
+        this.childId = childId;
+    }
+
+    public void setDayOfTheWeek(String dayOfTheWeek) {
+        this.dayOfTheWeek = dayOfTheWeek;
+    }
+
     public Task(String nom_task) {
         this.name_task = nom_task;
     }
