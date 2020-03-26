@@ -8,9 +8,35 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+interface OnGetDataListener {
+    void onSuccess(DataSnapshot dataSnapshot);
+    void onStart();
+    void onFailure();
+}
+
 public class Database {
     private final FirebaseDatabase database;
     private final DatabaseReference userRef;
+
+    public DatabaseReference getUserRef() {
+        return userRef;
+    }
+
+    public void readData(DatabaseReference ref, final OnGetDataListener listener) {
+        listener.onStart();
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                listener.onSuccess(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError firebaseError) {
+                listener.onFailure();
+            }
+        });
+
+    }
 
     public void CreateUserParent(User user){
         userRef.child(user.getPhoneNumber()).child("FirstName").setValue(user.getFirstName());
@@ -27,7 +53,7 @@ public class Database {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String child = dataSnapshot.child("Enfant").toString();
+                String child = dataSnapshot.child("Enfant").getValue().toString();
                 if(child == null) userRef.child(user.getParent()).child("Enfant").setValue(user.getPhoneNumber());
                 else userRef.child(user.getParent()).child("Enfant").setValue(child + "|" + user.getPhoneNumber());
             }
@@ -73,11 +99,29 @@ public class Database {
         });
         return userToSend;
     }
-
-
-
     public Database() {
         database =  FirebaseDatabase.getInstance();
         userRef = database.getReference("User");
     }
 }
+
+
+/*readData(root.child("MessagesOnLaunch").child("Message"), new OnGetDataListener() {
+                @Override
+                public void onSuccess(DataSnapshot dataSnapshot) {
+
+               //got data from database....now you can use the retrieved data
+
+
+                }
+                @Override
+                public void onStart() {
+                    //when starting
+                    Log.d("ONSTART", "Started");
+                }
+
+                @Override
+                public void onFailure() {
+                    Log.d("onFailure", "Failed");
+                }
+            });*/
