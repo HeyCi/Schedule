@@ -12,9 +12,9 @@ import java.util.ArrayList;
 
 public class KidTaskAdapter extends RecyclerView.Adapter<KidTaskAdapter.ViewHolder> {
 
-    private ArrayList<Tache> taskList;
+    private ArrayList<Task> taskList;
 
-    public KidTaskAdapter(ArrayList<Tache> taskList) {
+    public KidTaskAdapter(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
@@ -27,8 +27,8 @@ public class KidTaskAdapter extends RecyclerView.Adapter<KidTaskAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Tache tache = taskList.get(position);
-        holder.txt_tache.setText(tache.getNom_tache());
+        Task tache = taskList.get(position);
+        holder.txt_tache.setText(tache.getNom_task());
     }
 
     @Override
