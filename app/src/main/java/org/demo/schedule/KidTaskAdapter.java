@@ -29,7 +29,7 @@ public class KidTaskAdapter extends RecyclerView.Adapter<KidTaskAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Task tache = taskList.get(position);
         holder.txt_tache.setText(tache.getName_task());
-        //holder.txt_hour.setText(tache.getHour().toString());
+        holder.txt_hour.setText(tache.getHour());
     }
 
     @Override

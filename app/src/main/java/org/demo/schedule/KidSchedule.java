@@ -60,7 +60,7 @@ public class KidSchedule extends AppCompatActivity implements View.OnClickListen
                     taskCalendar.set(Integer.parseInt(dateSplit[0]), Integer.parseInt(dateSplit[1])-1, Integer.parseInt(dateSplit[2]));
                     if(taskCalendar.get(Calendar.DAY_OF_YEAR) == calendar.get(Calendar.DAY_OF_YEAR)) {
                         Task task = new Task(snapshot.child("name_task").getValue().toString());
-                        //task.setHour(snapshot.child("hour").getValue().toString());
+                        task.setHour(snapshot.child("hour").getValue().toString());
                         taskList.add(task);
                     }
                     adapter.notifyDataSetChanged();
