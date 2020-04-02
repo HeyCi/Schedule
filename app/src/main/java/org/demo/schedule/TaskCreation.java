@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.TimePickerDialog;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import android.os.Bundle;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
@@ -25,6 +27,15 @@ public class TaskCreation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_creation);
 
+        // Add a spinner in order to choose the type of the task
+        Spinner spinner = findViewById(R.id.type);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.task_type, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+
+        // Add a timePicker to choose the hour of the task
         choose_hr_btn = findViewById(R.id.btn_hr);
         choose_hr_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +55,7 @@ public class TaskCreation extends AppCompatActivity {
             }
         });
 
+        // Add a second timePicker to choose the duration of the task
         choose_duree_btn = findViewById(R.id.btn_dur);
         choose_duree_btn.setOnClickListener(new View.OnClickListener() {
             @Override
