@@ -95,7 +95,7 @@ public class Task {
         this.name_task = nom_task;
     }
 
-    public Task(String nom_task, String duration, String recurrence, String hour, int numberOfReminder, String reminderInterval,String type, String childId, String dayOfTheWeek) {
+    public Task(String nom_task, String duration, String recurrence, String hour, int numberOfReminder, String reminderInterval,String type, String childId, String dayOfTheWeek, String date) {
         this.name_task = nom_task;
         this.duration = duration;
         this.recurrence = recurrence;
@@ -105,5 +105,6 @@ public class Task {
         this.type = type;
         this.childId = childId;
         this.dayOfTheWeek = dayOfTheWeek;
+        this.date = date;
     }
 }
