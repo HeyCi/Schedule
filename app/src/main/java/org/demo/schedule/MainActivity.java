@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             finish();
         }
         else if(view == btn_sg) {
-            Intent intent = new Intent(this, TaskCreation.class);
+            Intent intent = new Intent(this, AdultSchedule.class);
             startActivity(intent);
             finish();
         }
