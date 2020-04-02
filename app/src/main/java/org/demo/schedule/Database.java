@@ -8,12 +8,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-interface OnGetDataListener {
-    void onSuccess(DataSnapshot dataSnapshot);
-    void onStart();
-    void onFailure();
-}
-
 public class Database {
     private final FirebaseDatabase database;
     private final DatabaseReference userRef;
@@ -22,7 +16,7 @@ public class Database {
         return userRef;
     }
 
-    public void readData(DatabaseReference ref, final OnGetDataListener listener) {
+    public void readData(DatabaseReference ref, final onGetDataListener listener) {
         listener.onStart();
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
