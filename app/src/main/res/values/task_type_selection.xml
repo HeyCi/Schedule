@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="task_type">
+        <item>Vie quotidienne</item>
+        <item>Activité scolaire</item>
+        <item>Activité extrascolaire</item>
+        <item>Activité ponctuelle</item>
+        <item>Réveil</item>
+        <item>Tâche butoire</item>
+    </string-array>
+</resources>
