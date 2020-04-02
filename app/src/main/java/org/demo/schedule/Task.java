@@ -1,5 +1,6 @@
 package org.demo.schedule;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Task {
@@ -12,6 +13,7 @@ public class Task {
     private String type;
     private String childId;
     private String dayOfTheWeek;
+    private LocalDate date;
 
     public String getName_task() {
         return name_task;
@@ -45,12 +47,16 @@ public class Task {
         return dayOfTheWeek;
     }
 
-    public LocalTime getReminderInterval() {
-        return reminderInterval;
+    public LocalTime getReminderInterval() { return reminderInterval; }
+
+    public void setReminderInterval(LocalTime reminderInterval) { this.reminderInterval = reminderInterval; }
+
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setReminderInterval(LocalTime reminderInterval) {
-        this.reminderInterval = reminderInterval;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public void setName_task(String name_task) {
