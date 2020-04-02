@@ -1,5 +1,6 @@
 package org.demo.schedule;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
@@ -46,33 +48,37 @@ public class KidSchedule extends AppCompatActivity implements View.OnClickListen
         rw_sched.setLayoutManager(new LinearLayoutManager(this));
 
         btn_next.setOnClickListener(this);
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        bdd.readData(bdd.getUserRef().child("").child("Task"), new OnGetDataListener() {
+        bdd.readData(bdd.getUserRef().child("0659025246").child("Task"), new OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot:dataSnapshot.getChildren()
-                     ) {
-                    Task task = snapshot.getValue(Task.class);
-                    taskList.add(task);
-                    Toast.makeText(this, "ajout de ma tache", Toast.LENGTH_LONG).show();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()
+                ) {
+                    String dateString = snapshot.child("date").getValue().toString();
+                    String[] dateSplit = dateString.split("-");
+                    Calendar taskCalendar = Calendar.getInstance();
+                    taskCalendar.set(Integer.parseInt(dateSplit[0]), Integer.parseInt(dateSplit[1])-1, Integer.parseInt(dateSplit[2]));
+                    if(taskCalendar.get(Calendar.DAY_OF_YEAR) == calendar.get(Calendar.DAY_OF_YEAR)) {
+                        Task task = new Task(snapshot.child("name_task").getValue().toString());
+                        //task.setHour(snapshot.child("hour").getValue().toString());
+                        taskList.add(task);
+                    }
                     adapter.notifyDataSetChanged();
-                };
+                }
+            }
 
             @Override
             public void onStart() {
-                    Log.d("ONSTART", "Started");
+                Log.d("ONSTART", "Started");
             }
 
             @Override
             public void onFailure() {
-
+                Log.d("onFailure", "Failed");
             }
         });
     }
+
 
     @Override
     public void onClick(View view) {

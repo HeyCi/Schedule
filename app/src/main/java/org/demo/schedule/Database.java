@@ -16,7 +16,7 @@ public class Database {
         return userRef;
     }
 
-    public void readData(DatabaseReference ref, final onGetDataListener listener) {
+    public void readData(DatabaseReference ref, final OnGetDataListener listener) {
         listener.onStart();
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

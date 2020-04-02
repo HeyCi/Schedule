@@ -29,6 +29,7 @@ public class KidTaskAdapter extends RecyclerView.Adapter<KidTaskAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Task tache = taskList.get(position);
         holder.txt_tache.setText(tache.getName_task());
+        //holder.txt_hour.setText(tache.getHour().toString());
     }
 
     @Override
@@ -38,12 +39,14 @@ public class KidTaskAdapter extends RecyclerView.Adapter<KidTaskAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView txt_tache;
+        TextView txt_hour;
         View root;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             root = itemView.findViewById(R.id.root);
             txt_tache = itemView.findViewById(R.id.txt_tache);
+            txt_hour = itemView.findViewById(R.id.txt_hour);
         }
     }
 
