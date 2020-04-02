@@ -1,31 +1,33 @@
 package org.demo.schedule;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Task {
     private String name_task;
-    private LocalTime duration;
-    private LocalTime recurrence;
-    private LocalTime hour;
+    private String duration;
+    private String recurrence;
+    private String hour;
     private int numberOfReminder;
-    private LocalTime reminderInterval;
+    private String reminderInterval;
     private String type;
     private String childId;
     private String dayOfTheWeek;
+    private String date;
 
     public String getName_task() {
         return name_task;
     }
 
-    public LocalTime getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public LocalTime getRecurrence() {
+    public String getRecurrence() {
         return recurrence;
     }
 
-    public LocalTime getHour() {
+    public String getHour() {
         return hour;
     }
 
@@ -45,27 +47,31 @@ public class Task {
         return dayOfTheWeek;
     }
 
-    public LocalTime getReminderInterval() {
-        return reminderInterval;
+    public String getReminderInterval() { return reminderInterval; }
+
+    public void setReminderInterval(String reminderInterval) { this.reminderInterval = reminderInterval; }
+
+    public String getDate() {
+        return date;
     }
 
-    public void setReminderInterval(LocalTime reminderInterval) {
-        this.reminderInterval = reminderInterval;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public void setName_task(String name_task) {
         this.name_task = name_task;
     }
 
-    public void setDuration(LocalTime duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
-    public void setRecurrence(LocalTime recurrence) {
+    public void setRecurrence(String recurrence) {
         this.recurrence = recurrence;
     }
 
-    public void setHour(LocalTime hour) {
+    public void setHour(String hour) {
         this.hour = hour;
     }
 
@@ -89,7 +95,7 @@ public class Task {
         this.name_task = nom_task;
     }
 
-    public Task(String nom_task, LocalTime duration, LocalTime recurrence, LocalTime hour, int numberOfReminder, LocalTime reminderInterval,String type, String childId, String dayOfTheWeek) {
+    public Task(String nom_task, String duration, String recurrence, String hour, int numberOfReminder, String reminderInterval,String type, String childId, String dayOfTheWeek) {
         this.name_task = nom_task;
         this.duration = duration;
         this.recurrence = recurrence;

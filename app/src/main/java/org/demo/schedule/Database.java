@@ -8,12 +8,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-interface OnGetDataListener {
-    void onSuccess(DataSnapshot dataSnapshot);
-    void onStart();
-    void onFailure();
-}
-
 public class Database {
     private final FirebaseDatabase database;
     private final DatabaseReference userRef;
@@ -35,7 +29,6 @@ public class Database {
                 listener.onFailure();
             }
         });
-
     }
 
     public void CreateUserParent(User user){
@@ -106,7 +99,7 @@ public class Database {
 }
 
 
-/*readData(root.child("MessagesOnLaunch").child("Message"), new OnGetDataListener() {
+/*db.readData(db.getUserRef.child("userid"), new OnGetDataListener() {
                 @Override
                 public void onSuccess(DataSnapshot dataSnapshot) {
 
