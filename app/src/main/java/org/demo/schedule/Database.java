@@ -35,7 +35,6 @@ public class Database {
                 listener.onFailure();
             }
         });
-
     }
 
     public void CreateUserParent(User user){
@@ -106,7 +105,7 @@ public class Database {
 }
 
 
-/*readData(root.child("MessagesOnLaunch").child("Message"), new OnGetDataListener() {
+/*db.readData(db.getUserRef.child("userid"), new OnGetDataListener() {
                 @Override
                 public void onSuccess(DataSnapshot dataSnapshot) {
 
