@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +30,7 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
     TextView txt_jour;
     Calendar calendar;
     Database bdd;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,9 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
         btn_prec = findViewById(R.id.btn_prec);
         txt_jour = findViewById(R.id.txt_jour);
         calendar = Calendar.getInstance();
+
+        SharedPreferences prefs = this.getSharedPreferences("login", Context.MODE_PRIVATE);
+        userId = prefs.getString("tel", null);
 
         txt_jour.setText(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
 
@@ -61,7 +67,6 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
         if(view == btn_add){
             Intent intent = new Intent(this, TaskCreation.class);
             startActivity(intent);
-            finish();
         } else if(view == btn_nxt) {
             calendar.add(Calendar.DATE, 1);
             txt_jour.setText(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
@@ -75,7 +80,7 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
 
     public void getBddData() {
         taskList.clear();
-        bdd.readData(bdd.getUserRef().child("0659025246").child("Task"), new OnGetDataListener() {
+        bdd.readData(bdd.getUserRef().child(userId).child("Task"), new OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()

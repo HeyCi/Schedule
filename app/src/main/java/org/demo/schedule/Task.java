@@ -1,9 +1,10 @@
 package org.demo.schedule;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Task {
+public class Task implements Serializable {
     private String name_task;
     private String duration;
     private String recurrence;

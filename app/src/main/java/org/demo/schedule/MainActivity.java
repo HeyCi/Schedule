@@ -51,17 +51,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(view == btn_la) {
             Intent intent = new Intent(this, AccountCreationActivity.class);
             startActivity(intent);
-            finish();
         }
         else if(view == btn_ac) {
             Intent intent = new Intent(this, KidSchedule.class);
             startActivity(intent);
-            finish();
         }
         else if(view == btn_sg) {
             Intent intent = new Intent(this, AdultSchedule.class);
             startActivity(intent);
-            finish();
         }
     }
 }

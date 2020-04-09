@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -45,7 +46,6 @@ public class KidSchedule extends AppCompatActivity implements View.OnClickListen
 
         SharedPreferences prefs = this.getSharedPreferences("login", Context.MODE_PRIVATE);
         userId = prefs.getString("tel", null);
-        Log.d("Connexion", "recup ailleurs : " + userId);
 
         txt_jour.setText(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
 
@@ -79,7 +79,6 @@ public class KidSchedule extends AppCompatActivity implements View.OnClickListen
 
     public void getBddData() {
         taskList.clear();
-        Toast.makeText(this, "" + userId, Toast.LENGTH_LONG).show();
         bdd.readData(bdd.getUserRef().child(userId).child("Task"), new OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
@@ -112,7 +111,8 @@ public class KidSchedule extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onTaskClick(Task task, int position) {
-        Toast.makeText(this, "clic sur ma tache", Toast.LENGTH_LONG).show();
-        // TODO créer un intent et lui envoyer la tache en paramètre
+        Intent intent = new Intent(this, KidTaskActivity.class);
+        intent.putExtra("task", task);
+        startActivity(intent);
     }
 }
