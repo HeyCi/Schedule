@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class KidSchedule extends AppCompatActivity implements View.OnClickListener {
+public class KidSchedule extends AppCompatActivity implements View.OnClickListener, OnTaskClickListener {
 
     RecyclerView rw_sched;
     ArrayList<Task> taskList;
@@ -44,6 +44,7 @@ public class KidSchedule extends AppCompatActivity implements View.OnClickListen
         bdd = new Database();
         taskList = new ArrayList<>();
         adapter = new KidTaskAdapter(taskList);
+        adapter.setOnTaskClickListener(this);
 
         rw_sched.setAdapter(adapter);
         rw_sched.setLayoutManager(new LinearLayoutManager(this));
@@ -66,7 +67,6 @@ public class KidSchedule extends AppCompatActivity implements View.OnClickListen
             txt_jour.setText(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
             getBddData();
         }
-
     }
 
     public void getBddData() {
@@ -99,5 +99,11 @@ public class KidSchedule extends AppCompatActivity implements View.OnClickListen
                 Log.d("onFailure", "Failed");
             }
         });
+    }
+
+    @Override
+    public void onTaskClick(Task task, int position) {
+        Toast.makeText(this, "clic sur ma tache", Toast.LENGTH_LONG).show();
+        // TODO créer un intent et lui envoyer la tache en paramètre
     }
 }
