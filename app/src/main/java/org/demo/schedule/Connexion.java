@@ -39,9 +39,9 @@ public class Connexion extends AppCompatActivity implements View.OnClickListener
                 @Override
                 public void onSuccess(DataSnapshot dataSnapshot) {
                     if(dataSnapshot.child(phoneNumber).exists()){
-                        SharedPreferences prefs = getPreferences(Context.MODE_PRIVATE);
+                        SharedPreferences prefs = getSharedPreferences("login", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = prefs.edit();
-                        editor.putString("login", phoneNumber);
+                        editor.putString("tel", phoneNumber);
                         editor.commit();
 
                         Log.d("Connexion", "Success");
