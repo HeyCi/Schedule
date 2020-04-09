@@ -38,8 +38,6 @@ public class TaskCreation extends AppCompatActivity {
         bdd = new Database();
 
 
-
-
         // Add a timePicker to choose the hour of the task
         choose_hr_btn = findViewById(R.id.btn_hr);
         choose_hr_btn.setOnClickListener(new View.OnClickListener() {
