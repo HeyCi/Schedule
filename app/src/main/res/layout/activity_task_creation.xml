@@ -38,7 +38,7 @@
         android:scrollbarSize="14dp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_date"
         android:layout_width="185dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -81,52 +81,52 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginBottom="20dp"
         android:orientation="horizontal"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/btn_lun"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="L" />
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/btn_mar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="M" />
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/btn_mer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="M" />
 
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/btn_jeu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="J" />
 
         <Button
-            android:id="@+id/button9"
+            android:id="@+id/btn_ven"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="V" />
 
         <Button
-            android:id="@+id/button10"
+            android:id="@+id/btn_sam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="S" />
 
         <Button
-            android:id="@+id/button11"
+            android:id="@+id/btn_dim"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
