@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="task_type">
-        <item>Vie quotidienne</item>
-        <item>Activité scolaire</item>
-        <item>Activité extrascolaire</item>
-        <item>Activité ponctuelle</item>
-        <item>Réveil</item>
-        <item>Tâche butoire</item>
+        <item name="1">Vie quotidienne</item>
+        <item name="2">Activité scolaire</item>
+        <item name="3">Activité extrascolaire</item>
+        <item name="4">Activité ponctuelle</item>
+        <item name="5">Réveil</item>
+        <item name="6">Tâche butoire</item>
     </string-array>
+
+    <string-array name="number_reminder">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+    <string-array name="interval_of_reminder">
+        <item>5 min</item>
+        <item>10 min</item>
+        <item>20 min</item>
+        <item>30 min</item>
+    </string-array>
+
+
 </resources>
