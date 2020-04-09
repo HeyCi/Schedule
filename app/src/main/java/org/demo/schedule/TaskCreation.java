@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.TimePickerDialog;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
@@ -28,14 +29,37 @@ public class TaskCreation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_creation);
 
-        // Add a spinner in order to choose the type of the task
-        Spinner spinner = findViewById(R.id.type);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.task_type, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
         bdd = new Database();
+
+        // Add a spinner in order to choose the type of the task
+        Spinner spinner_type = findViewById(R.id.type);
+        ArrayAdapter<CharSequence> adapter_type = ArrayAdapter.createFromResource(this,
+                R.array.task_type, android.R.layout.simple_spinner_item);
+        adapter_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_type.setAdapter(adapter_type);
+
+        spinner_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        findViewById(R.id.linear_dw).setVisibility(View.GONE);
+                        break;
+                    case 1:
+                    case 2:
+                    case 4:
+                    case 5:
+                        findViewById(R.id.linear_dw).setVisibility(View.VISIBLE);
+                        break;
+                    default:
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         // Add a timePicker to choose the hour of the task
@@ -77,6 +101,20 @@ public class TaskCreation extends AppCompatActivity {
                 timePickerDialog.show();
             }
         });
+
+        // Add a spinner to choose the number of reminder for the task
+        Spinner spinner_number = findViewById(R.id.num_reminder);
+        ArrayAdapter<CharSequence> adapter_number = ArrayAdapter.createFromResource(this,
+                R.array.number_reminder, android.R.layout.simple_spinner_item);
+        adapter_number.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_number.setAdapter(adapter_number);
+
+        // Add a spinner to choose the number of reminder for the task
+        Spinner spinner_interval = findViewById(R.id.reminder_interval);
+        ArrayAdapter<CharSequence> adapter_interval = ArrayAdapter.createFromResource(this,
+                R.array.interval_of_reminder, android.R.layout.simple_spinner_item);
+        adapter_interval.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_interval.setAdapter(adapter_interval);
 
     }
 
