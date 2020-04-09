@@ -23,6 +23,8 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
     ArrayList<Task> taskList;
     KidTaskAdapter adapter;
     Button btn_add;
+    Button btn_nxt;
+    Button btn_prec;
     TextView txt_jour;
     Calendar calendar;
     Database bdd;
@@ -33,6 +35,8 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_adult_schedule);
         rw_sched = findViewById(R.id.rw_kidsched);
         btn_add = findViewById(R.id.btn_add_task);
+        btn_nxt = findViewById(R.id.btn_nxt);
+        btn_prec = findViewById(R.id.btn_prec);
         txt_jour = findViewById(R.id.txt_jour);
         calendar = Calendar.getInstance();
 
@@ -46,7 +50,31 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
         rw_sched.setLayoutManager(new LinearLayoutManager(this));
 
         btn_add.setOnClickListener(this);
+        btn_nxt.setOnClickListener(this);
+        btn_prec.setOnClickListener(this);
 
+        getBddData();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view == btn_add){
+            Intent intent = new Intent(this, TaskCreation.class);
+            startActivity(intent);
+            finish();
+        } else if(view == btn_nxt) {
+            calendar.add(Calendar.DATE, 1);
+            txt_jour.setText(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
+            getBddData();
+        } else if (view == btn_prec) {
+            calendar.add(Calendar.DATE, -1);
+            txt_jour.setText(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
+            getBddData();
+        }
+    }
+
+    public void getBddData() {
+        taskList.clear();
         bdd.readData(bdd.getUserRef().child("0659025246").child("Task"), new OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
@@ -75,14 +103,5 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
                 Log.d("onFailure", "Failed");
             }
         });
-    }
-
-    @Override
-    public void onClick(View view) {
-        if(view == btn_add){
-            Intent intent = new Intent(this, TaskCreation.class);
-            startActivity(intent);
-            finish();
-        }
     }
 }
