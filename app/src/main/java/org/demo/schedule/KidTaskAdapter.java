@@ -13,9 +13,14 @@ import java.util.ArrayList;
 public class KidTaskAdapter extends RecyclerView.Adapter<KidTaskAdapter.ViewHolder> {
 
     private ArrayList<Task> taskList;
+    private OnTaskClickListener taskClickListener;
 
     public KidTaskAdapter(ArrayList<Task> taskList) {
         this.taskList = taskList;
+    }
+
+    public void setOnTaskClickListener(OnTaskClickListener taskClickListener) {
+        this.taskClickListener = taskClickListener;
     }
 
     @NonNull
@@ -26,10 +31,18 @@ public class KidTaskAdapter extends RecyclerView.Adapter<KidTaskAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Task tache = taskList.get(position);
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+        final Task tache = taskList.get(position);
         holder.txt_tache.setText(tache.getName_task());
         holder.txt_hour.setText(tache.getHour());
+        holder.root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(taskClickListener != null) {
+                    taskClickListener.onTaskClick(tache, holder.getAdapterPosition());
+                }
+            }
+        });
     }
 
     @Override
