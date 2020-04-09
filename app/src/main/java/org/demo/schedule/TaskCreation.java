@@ -21,6 +21,7 @@ public class TaskCreation extends AppCompatActivity {
     Button choose_hr_btn;
     Button choose_duree_btn;
     TimePickerDialog timePickerDialog;
+    Database bdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,10 @@ public class TaskCreation extends AppCompatActivity {
                 R.array.task_type, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        bdd = new Database();
+
+
 
 
         // Add a timePicker to choose the hour of the task
