@@ -43,6 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/colorButton"
         android:text="Date"
         android:textSize="24sp" />
 
@@ -57,9 +58,10 @@
             android:id="@+id/btn_hr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="20dp"
             android:layout_gravity="center"
+            android:layout_marginHorizontal="20dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorButton"
             android:text="Heure"
             android:textSize="24sp" />
 
@@ -67,9 +69,10 @@
             android:id="@+id/btn_dur"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="20dp"
             android:layout_gravity="center"
+            android:layout_marginHorizontal="20dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorButton"
             android:text="Durée"
             android:textSize="24sp" />
     </LinearLayout>
@@ -88,6 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorButton"
             android:text="L" />
 
         <Button
@@ -95,6 +99,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorButton"
             android:text="M" />
 
         <Button
@@ -102,6 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorButton"
             android:text="M" />
 
         <Button
@@ -109,6 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorButton"
             android:text="J" />
 
         <Button
@@ -116,6 +123,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorButton"
             android:text="V" />
 
         <Button
@@ -123,6 +131,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorButton"
             android:text="S" />
 
         <Button
@@ -130,6 +139,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorButton"
             android:text="D" />
     </LinearLayout>
 
@@ -185,11 +195,12 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/btn_create_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="28dp"
+        android:backgroundTint="@color/colorButton"
         android:text="Créer"
         android:textSize="30sp" />
 
