@@ -65,9 +65,11 @@ public class Database {
         taskRef.child("recurrence").setValue(task.getRecurrence());
         taskRef.child("hour").setValue(task.getHour());
         taskRef.child("numberOfReminder").setValue(task.getNumberOfReminder());
+        taskRef.child("reminderInterval").setValue(task.getReminderInterval());
         taskRef.child("type").setValue(task.getType());
         taskRef.child("childId").setValue(task.getChildId());
         taskRef.child("dayOfTheWeek").setValue(task.getDayOfTheWeek());
+        taskRef.child("date").setValue(task.getDate());
     }
 
     public User GetUser(String id){
