@@ -55,7 +55,11 @@ public class AccountCreationActivity extends AppCompatActivity implements View.O
             kidAccountAdapter.notifyDataSetChanged();
         }
         else if(view == btn_create) {
-            User parent = new User(String.valueOf(et_firstname_parent.getText()), String.valueOf(et_lastname_parent.getText()), String.valueOf(et_phone_parent.getText()), "parent");
+            String[] kidTelList = new String[kidList.size()];
+            for(int i = 0; i < kidList.size(); i++) {
+                kidTelList[i] = kidList.get(i).getPhoneNumber();
+            }
+            User parent = new User(String.valueOf(et_firstname_parent.getText()), String.valueOf(et_lastname_parent.getText()), String.valueOf(et_phone_parent.getText()), "parent", kidTelList);
             bdd.CreateUserParent(parent);
             kidList = kidAccountAdapter.getKids();
             for(User kid : kidList) {

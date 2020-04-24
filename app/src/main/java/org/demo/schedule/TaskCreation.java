@@ -351,7 +351,7 @@ public class TaskCreation extends AppCompatActivity implements View.OnClickListe
             Log.d("nombre de rappels : " + number_rem_task, "ok");
             Log.d("rappelinterval : " + interval_task, "ok");
 
-            Task task_child = new Task(String.valueOf(et_name_task.getText()), duration_task, recurr_task, hour_task, number_rem_task, interval_task, type_task, "0659025246", day_week_task, date_task);
+            Task task_child = new Task(String.valueOf(et_name_task.getText()), duration_task, recurr_task, hour_task, number_rem_task, interval_task, type_task, "0698765432", day_week_task, date_task);
             bdd.CreateTask(task_child);
         }
     }

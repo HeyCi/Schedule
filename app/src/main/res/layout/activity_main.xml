@@ -12,19 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="loup-alpha" />
+        android:text="Création compte" />
 
     <Button
         android:id="@+id/btn_ac"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Licornasse" />
+        android:text="Connexion" />
 
-    <Button
-        android:id="@+id/btn_sg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Siège" />
 </LinearLayout>

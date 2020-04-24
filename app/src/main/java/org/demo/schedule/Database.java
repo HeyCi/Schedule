@@ -36,6 +36,7 @@ public class Database {
         userRef.child(user.getPhoneNumber()).child("LastName").setValue(user.getLastName());
         userRef.child(user.getPhoneNumber()).child("PhoneNumber").setValue(user.getPhoneNumber());
         userRef.child(user.getPhoneNumber()).child("Type").setValue(user.getType());
+        userRef.child(user.getPhoneNumber()).child("ChildList").setValue(user.getEnfants());
     }
 
     public void CreateUserChild(final User user){

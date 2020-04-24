@@ -16,7 +16,9 @@ import android.widget.TextView;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class AdultSchedule extends AppCompatActivity implements View.OnClickListener {
@@ -31,6 +33,9 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
     Calendar calendar;
     Database bdd;
     String userId;
+    List<String> childList;
+    String childId;
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +48,39 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
         txt_jour = findViewById(R.id.txt_jour);
         calendar = Calendar.getInstance();
 
-        SharedPreferences prefs = this.getSharedPreferences("login", Context.MODE_PRIVATE);
-        userId = prefs.getString("tel", null);
-
         txt_jour.setText(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
 
         bdd = new Database();
         taskList = new ArrayList<>();
         adapter = new KidTaskAdapter(taskList);
+        childList = new ArrayList<>();
+
+        prefs = this.getSharedPreferences("login", Context.MODE_PRIVATE);
+        userId = prefs.getString("tel", null);
+        bdd.readData(bdd.getUserRef().child(userId), new OnGetDataListener() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                //childList = Arrays.asList(user.getEnfants());
+                Log.d("montest", "liste " + user.getPhoneNumber());
+                Log.d("montest", "liste " + Arrays.toString(user.getEnfants()));
+                /*childList = (List<String>) dataSnapshot.child("Enfants").getValue();
+                Log.d("montest", "liste " + childList);
+                childId = childList.get(0);*/
+                childId = "0698765432";
+                getBddData();
+            }
+
+            @Override
+            public void onStart() {
+                Log.d("ONSTART", "Started");
+            }
+
+            @Override
+            public void onFailure() {
+                Log.d("ONFAIL", "Failed");
+            }
+        });
 
         rw_sched.setAdapter(adapter);
         rw_sched.setLayoutManager(new LinearLayoutManager(this));
@@ -58,8 +88,6 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
         btn_add.setOnClickListener(this);
         btn_nxt.setOnClickListener(this);
         btn_prec.setOnClickListener(this);
-
-        getBddData();
     }
 
     @Override
@@ -80,7 +108,7 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
 
     public void getBddData() {
         taskList.clear();
-        bdd.readData(bdd.getUserRef().child(userId).child("Task"), new OnGetDataListener() {
+        bdd.readData(bdd.getUserRef().child(childId).child("Task"), new OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()
@@ -91,7 +119,7 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
                     taskCalendar.set(Integer.parseInt(dateSplit[0]), Integer.parseInt(dateSplit[1])-1, Integer.parseInt(dateSplit[2]));
                     if(taskCalendar.get(Calendar.DAY_OF_YEAR) == calendar.get(Calendar.DAY_OF_YEAR)) {
                         Task task = new Task(snapshot.child("name_task").getValue().toString());
-                        //task.setHour(snapshot.child("hour").getValue().toString());
+                        task.setHour(snapshot.child("hour").getValue().toString());
                         taskList.add(task);
                     }
                     adapter.notifyDataSetChanged();

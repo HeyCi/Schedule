@@ -6,6 +6,7 @@ public class User {
     private String phoneNumber;
     private String type;
     private String parent;
+    private String[] enfants;
 
     public String getFirstName() {
         return firstName;
@@ -24,6 +25,10 @@ public class User {
     }
 
     public String getParent() { return parent; }
+
+    public String[] getEnfants() {
+        return enfants;
+    }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -45,11 +50,16 @@ public class User {
         this.parent = parent;
     }
 
-    public User(String firstName, String lastName, String phoneNumber, String type) {
+    public void setEnfants(String[] enfants) {
+        this.enfants = enfants;
+    }
+
+    public User(String firstName, String lastName, String phoneNumber, String type, String[] enfants) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.type = type;
+        this.enfants = enfants;
     }
 
     public User(String firstName, String lastName, String phoneNumber, String type, String parent) {

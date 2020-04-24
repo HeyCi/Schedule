@@ -2,48 +2,65 @@ package org.demo.schedule;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.database.DataSnapshot;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button btn_la;
     Button btn_ac;
-    Button btn_sg;
-
+    String userId;
+    Database bdd;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        Intent intent = new Intent(this, Connexion.class);
-        startActivity(intent);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btn_la = findViewById(R.id.btn_la);
         btn_ac = findViewById(R.id.btn_ac);
-        btn_sg = findViewById(R.id.btn_sg);
 
         btn_la.setOnClickListener(this);
         btn_ac.setOnClickListener(this);
-        btn_sg.setOnClickListener(this);
 
-        User userTest = new User("nametest", "lastNametest", "0659025247","Parent");
-        User userChildTest = new User("child", "lastChild", "0659025246","Enfant", "0659025247");
-        Database db = new Database();
-        db.GetUser(userTest.getPhoneNumber());
-        /*User userTest = new User("nametest", "lastNametest", "0659025247","Parent");
-        User userChildTest = new User("child", "lastChild", "0659025246","Enfant", "0659025247");
-        Database db = new Database();
-        db.GetUser(userTest.getPhoneNumber());
-        db.CreateUserParent(userTest);
-        db.CreateUserChild(userChildTest);
-        Task taskTest = new Task("taskTest", null, null, null, 5, "Quotidienne","0659025246","LMMJVSD");
-        db.CreateTask(taskTest);*/
+        SharedPreferences prefs = this.getSharedPreferences("login", Context.MODE_PRIVATE);
+        if(prefs.contains("tel")) {
+            userId = prefs.getString("tel", null);
+            bdd = new Database();
+            bdd.readData(bdd.getUserRef().child(userId), new OnGetDataListener() {
+                @Override
+                public void onSuccess(DataSnapshot dataSnapshot) {
+                    Context context = getApplicationContext();
+                    String type = dataSnapshot.child("Type").getValue().toString();
+                    if(type.equals("parent")) {
+                        Intent intent = new Intent(context, AdultSchedule.class);
+                        startActivity(intent);
+                    } else if (type.equals("enfant")) {
+                        Intent intent = new Intent(context, KidSchedule.class);
+                        startActivity(intent);
+                    }
+                }
+
+                @Override
+                public void onStart() {
+                    Log.d("ONSTART", "Started");
+                }
+
+                @Override
+                public void onFailure() {
+                    Log.d("ONFAIL", "Failed");
+                }
+            });
+        }
+
     }
 
     @Override
@@ -53,11 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
         else if(view == btn_ac) {
-            Intent intent = new Intent(this, KidSchedule.class);
-            startActivity(intent);
-        }
-        else if(view == btn_sg) {
-            Intent intent = new Intent(this, AdultSchedule.class);
+            Intent intent = new Intent(this, Connexion.class);
             startActivity(intent);
         }
     }
