@@ -26,7 +26,7 @@ public class KidChoosingActivity extends AppCompatActivity implements View.OnCli
     String userId;
     List<String> prenomsEnfants;
     Database bdd;
-    String[] kidList;
+    List<String> kidList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,17 +37,19 @@ public class KidChoosingActivity extends AppCompatActivity implements View.OnCli
         kidspinner = findViewById(R.id.kidspinner);
 
         prenomsEnfants = new ArrayList<>();
-        prenomsEnfants.add("Huguette");
-        prenomsEnfants.add("Raymond");
+        prenomsEnfants.add("Sélectionner");
 
         bdd = new Database();
         userId = getIntent().getStringExtra("userID");
-        bdd.readData(bdd.getUserRef().child(userId), new OnGetDataListener() {
+        bdd.readData(bdd.getUserRef(), new OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
-                String enfants = dataSnapshot.child("Enfant").getValue().toString();
-                kidList = enfants.split("\\|");
-                prenomsEnfants.addAll(Arrays.asList(kidList));
+                String enfants = dataSnapshot.child(userId).child("Enfant").getValue().toString();
+                kidList = Arrays.asList(enfants.split("\\|"));
+                for(String kidtel : kidList) {
+                    String gamin = dataSnapshot.child(kidtel).child("FirstName").getValue().toString();
+                    prenomsEnfants.add(gamin);
+                }
             }
 
             @Override
@@ -71,15 +73,18 @@ public class KidChoosingActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(this, AdultSchedule.class);
-        intent.putExtra("kidtel", kidselected);
-        startActivity(intent);
+        if(kidselected != "Sélectionner") {
+            Intent intent = new Intent(this, AdultSchedule.class);
+            intent.putExtra("kidtel", kidselected);
+            startActivity(intent);
+        }
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        kidselected = String.valueOf(adapterView.getItemAtPosition(i));
-        Toast.makeText(this, kidselected, Toast.LENGTH_LONG).show();
+        if(i != 0) {
+            kidselected = kidList.get(i - 1);
+        }
     }
 
     @Override

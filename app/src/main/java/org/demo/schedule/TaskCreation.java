@@ -74,8 +74,7 @@ public class TaskCreation extends AppCompatActivity implements View.OnClickListe
         choose_create_btn = findViewById(R.id.btn_create_task);
         choose_create_btn.setOnClickListener(this);
 
-        SharedPreferences prefs = this.getSharedPreferences("login", Context.MODE_PRIVATE);
-        user_id = prefs.getString("tel", null);
+        user_id = getIntent().getStringExtra("kidtel");
 
         bdd = new Database();
 
@@ -351,7 +350,7 @@ public class TaskCreation extends AppCompatActivity implements View.OnClickListe
             Log.d("nombre de rappels : " + number_rem_task, "ok");
             Log.d("rappelinterval : " + interval_task, "ok");
 
-            Task task_child = new Task(String.valueOf(et_name_task.getText()), duration_task, recurr_task, hour_task, number_rem_task, interval_task, type_task, "0698765432", day_week_task, date_task);
+            Task task_child = new Task(String.valueOf(et_name_task.getText()), duration_task, recurr_task, hour_task, number_rem_task, interval_task, type_task, user_id, day_week_task, date_task);
             bdd.CreateTask(task_child);
         }
     }
