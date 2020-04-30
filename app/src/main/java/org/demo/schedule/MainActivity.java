@@ -31,6 +31,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_la.setOnClickListener(this);
         btn_ac.setOnClickListener(this);
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         SharedPreferences prefs = this.getSharedPreferences("login", Context.MODE_PRIVATE);
         if(prefs.contains("tel")) {
             userId = prefs.getString("tel", null);
