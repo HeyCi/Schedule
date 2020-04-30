@@ -16,9 +16,7 @@ import android.widget.TextView;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
 
 public class AdultSchedule extends AppCompatActivity implements View.OnClickListener {
@@ -33,7 +31,6 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
     Calendar calendar;
     Database bdd;
     String userId;
-    List<String> childList;
     String childId;
     SharedPreferences prefs;
 
@@ -53,34 +50,10 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
         bdd = new Database();
         taskList = new ArrayList<>();
         adapter = new KidTaskAdapter(taskList);
-        childList = new ArrayList<>();
 
         prefs = this.getSharedPreferences("login", Context.MODE_PRIVATE);
         userId = prefs.getString("tel", null);
-        bdd.readData(bdd.getUserRef().child(userId), new OnGetDataListener() {
-            @Override
-            public void onSuccess(DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                //childList = Arrays.asList(user.getEnfants());
-                Log.d("montest", "liste " + user.getPhoneNumber());
-                Log.d("montest", "liste " + Arrays.toString(user.getEnfants()));
-                /*childList = (List<String>) dataSnapshot.child("Enfants").getValue();
-                Log.d("montest", "liste " + childList);
-                childId = childList.get(0);*/
-                childId = "0698765432";
-                getBddData();
-            }
-
-            @Override
-            public void onStart() {
-                Log.d("ONSTART", "Started");
-            }
-
-            @Override
-            public void onFailure() {
-                Log.d("ONFAIL", "Failed");
-            }
-        });
+        childId = "0698765432";
 
         rw_sched.setAdapter(adapter);
         rw_sched.setLayoutManager(new LinearLayoutManager(this));
