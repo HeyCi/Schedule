@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
         <activity android:name=".StatChild"></activity>
+=======
+        <activity android:name=".KidChoosingActivity"></activity>
+>>>>>>> 2cf4c635d55404674431599a0f2752a31fa79d1d
         <activity android:name=".KidTaskActivity" />
         <activity android:name=".TaskCreation" />
         <activity android:name=".AdultSchedule" />

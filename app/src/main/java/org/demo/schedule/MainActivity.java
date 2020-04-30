@@ -26,14 +26,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this, StatChild.class);
-        startActivity(intent);
         btn_la = findViewById(R.id.btn_la);
         btn_ac = findViewById(R.id.btn_ac);
 
         btn_la.setOnClickListener(this);
         btn_ac.setOnClickListener(this);
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         SharedPreferences prefs = this.getSharedPreferences("login", Context.MODE_PRIVATE);
         if(prefs.contains("tel")) {
             userId = prefs.getString("tel", null);
@@ -44,10 +47,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Context context = getApplicationContext();
                     String type = dataSnapshot.child("Type").getValue().toString();
                     if(type.equals("parent")) {
-                        Intent intent = new Intent(context, AdultSchedule.class);
+                        Intent intent = new Intent(context, KidChoosingActivity.class);
+                        intent.putExtra("userID", userId);
                         startActivity(intent);
                     } else if (type.equals("enfant")) {
                         Intent intent = new Intent(context, KidSchedule.class);
+                        intent.putExtra("userID", userId);
                         startActivity(intent);
                     }
                 }

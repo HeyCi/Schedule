@@ -8,6 +8,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Database {
     private final FirebaseDatabase database;
     private final DatabaseReference userRef;
@@ -38,17 +41,19 @@ public class Database {
         userRef.child(user.getPhoneNumber()).child("Type").setValue(user.getType());
     }
 
-    public void CreateUserChild(final User user){
+    public void CreateUserChild(final User user, final String childNumber){
         CreateUserParent(user);
         userRef.child(user.getPhoneNumber()).child("Parent").setValue(user.getParent());
         userRef.child(user.getParent()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String child = dataSnapshot.child("Enfant").getValue().toString();
-                if(child == null) userRef.child(user.getParent()).child("Enfant").setValue(user.getPhoneNumber());
-                else userRef.child(user.getParent()).child("Enfant").setValue(child + "|" + user.getPhoneNumber());
+               if(dataSnapshot.child("Enfant").exists()){
+                    String c = dataSnapshot.child("Enfant").getValue().toString();
+                    userRef.child(user.getParent()).child("Enfant").setValue(c + "|" + childNumber);
+                } else {
+                    userRef.child(user.getParent()).child("Enfant").setValue(childNumber);
+                }
+
             }
             @Override
             public void onCancelled(DatabaseError error) {
@@ -94,6 +99,25 @@ public class Database {
         });
         return userToSend;
     }
+
+    public void setAlarmManager(final String childNumber){
+        final List<Task> taskList = new ArrayList<Task>();
+        readData(userRef, new OnGetDataListener() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data: dataSnapshot.child(childNumber).child("Task").getChildren()){
+                    taskList.add(data.getValue(Task.class));
+                }
+            }
+
+            @Override
+            public void onStart() {Log.d("ONSTART", "Started");}
+
+            @Override
+            public void onFailure() {Log.d("onFailure", "Failed");}
+        });
+    }
+
     public Database() {
         database =  FirebaseDatabase.getInstance();
         userRef = database.getReference("User");

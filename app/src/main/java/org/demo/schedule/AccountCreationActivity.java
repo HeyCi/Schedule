@@ -51,17 +51,21 @@ public class AccountCreationActivity extends AppCompatActivity implements View.O
     public void onClick(View view) {
         if(view == btn_add_kid) {
             User kid = new User("null", "null", "null", "enfant", "null");
-            kidList.add(0, kid);
+            kidList.add(kid);
             kidAccountAdapter.notifyDataSetChanged();
         }
         else if(view == btn_create) {
+            String childNumber ="";
             User parent = new User(String.valueOf(et_firstname_parent.getText()), String.valueOf(et_lastname_parent.getText()), String.valueOf(et_phone_parent.getText()), "parent");
             bdd.CreateUserParent(parent);
             kidList = kidAccountAdapter.getKids();
             for(User kid : kidList) {
+                if (childNumber != "") childNumber += "|"+kid.getPhoneNumber();
+                else childNumber = kid.getPhoneNumber();
                 kid.setParent(parent.getPhoneNumber());
-                bdd.CreateUserChild(kid);
+                bdd.CreateUserChild(kid, childNumber);
             }
+            finish();
         }
     }
 }

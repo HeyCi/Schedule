@@ -5,16 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 
@@ -44,8 +40,7 @@ public class KidSchedule extends AppCompatActivity implements View.OnClickListen
         txt_jour = findViewById(R.id.txt_jour);
         calendar = Calendar.getInstance();
 
-        SharedPreferences prefs = this.getSharedPreferences("login", Context.MODE_PRIVATE);
-        userId = prefs.getString("tel", null);
+        userId = getIntent().getStringExtra("userID");
 
         txt_jour.setText(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
 
