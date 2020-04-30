@@ -92,6 +92,8 @@ public class Task implements Serializable {
         this.dayOfTheWeek = dayOfTheWeek;
     }
 
+    public Task(){}
+
     public Task(String nom_task) {
         this.name_task = nom_task;
     }
