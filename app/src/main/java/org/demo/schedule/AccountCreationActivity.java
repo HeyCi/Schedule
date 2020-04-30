@@ -51,7 +51,7 @@ public class AccountCreationActivity extends AppCompatActivity implements View.O
     public void onClick(View view) {
         if(view == btn_add_kid) {
             User kid = new User("null", "null", "null", "enfant", "null");
-            kidList.add(0, kid);
+            kidList.add(kid);
             kidAccountAdapter.notifyDataSetChanged();
         }
         else if(view == btn_create) {
