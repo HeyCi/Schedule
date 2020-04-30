@@ -41,10 +41,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Context context = getApplicationContext();
                     String type = dataSnapshot.child("Type").getValue().toString();
                     if(type.equals("parent")) {
-                        Intent intent = new Intent(context, AdultSchedule.class);
+                        Intent intent = new Intent(context, KidChoosingActivity.class);
+                        intent.putExtra("userID", userId);
                         startActivity(intent);
                     } else if (type.equals("enfant")) {
                         Intent intent = new Intent(context, KidSchedule.class);
+                        intent.putExtra("userID", userId);
                         startActivity(intent);
                     }
                 }

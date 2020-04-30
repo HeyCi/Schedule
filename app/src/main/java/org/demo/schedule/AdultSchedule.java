@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,9 +28,7 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
     TextView txt_jour;
     Calendar calendar;
     Database bdd;
-    String userId;
     String childId;
-    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +47,7 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
         taskList = new ArrayList<>();
         adapter = new KidTaskAdapter(taskList);
 
-        prefs = this.getSharedPreferences("login", Context.MODE_PRIVATE);
-        userId = prefs.getString("tel", null);
-        childId = "0698765432";
+        childId = getIntent().getStringExtra("kidtel");
 
         rw_sched.setAdapter(adapter);
         rw_sched.setLayoutManager(new LinearLayoutManager(this));
@@ -67,6 +61,7 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         if(view == btn_add){
             Intent intent = new Intent(this, TaskCreation.class);
+            intent.putExtra("kidtel", childId);
             startActivity(intent);
         } else if(view == btn_nxt) {
             calendar.add(Calendar.DATE, 1);
