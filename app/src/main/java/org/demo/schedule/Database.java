@@ -41,18 +41,19 @@ public class Database {
         userRef.child(user.getPhoneNumber()).child("Type").setValue(user.getType());
     }
 
-    public void CreateUserChild(final User user){
+    public void CreateUserChild(final User user, final String childNumber){
         CreateUserParent(user);
         userRef.child(user.getPhoneNumber()).child("Parent").setValue(user.getParent());
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        userRef.child(user.getParent()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child(user.getParent()).child("Enfant").exists()){
-                    String c = dataSnapshot.child(user.getParent()).child("Enfant").getValue().toString();
-                    userRef.child(user.getParent()).child("Enfant").setValue(c + "|" + user.getPhoneNumber());
+               if(dataSnapshot.child("Enfant").exists()){
+                    String c = dataSnapshot.child("Enfant").getValue().toString();
+                    userRef.child(user.getParent()).child("Enfant").setValue(c + "|" + childNumber);
                 } else {
-                    userRef.child(user.getParent()).child("Enfant").setValue(user.getPhoneNumber());
+                    userRef.child(user.getParent()).child("Enfant").setValue(childNumber);
                 }
+
             }
             @Override
             public void onCancelled(DatabaseError error) {

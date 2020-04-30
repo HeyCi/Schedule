@@ -55,13 +55,17 @@ public class AccountCreationActivity extends AppCompatActivity implements View.O
             kidAccountAdapter.notifyDataSetChanged();
         }
         else if(view == btn_create) {
+            String childNumber ="";
             User parent = new User(String.valueOf(et_firstname_parent.getText()), String.valueOf(et_lastname_parent.getText()), String.valueOf(et_phone_parent.getText()), "parent");
             bdd.CreateUserParent(parent);
             kidList = kidAccountAdapter.getKids();
             for(User kid : kidList) {
+                if (childNumber != "") childNumber += "|"+kid.getPhoneNumber();
+                else childNumber = kid.getPhoneNumber();
                 kid.setParent(parent.getPhoneNumber());
-                bdd.CreateUserChild(kid);
+                bdd.CreateUserChild(kid, childNumber);
             }
+            finish();
         }
     }
 }
