@@ -196,10 +196,10 @@ public class TaskCreation extends AppCompatActivity implements View.OnClickListe
             date_picker = new DatePickerDialog(TaskCreation.this, new DatePickerDialog.OnDateSetListener() {
                 public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
                     day = String.valueOf(selectedDay);
-                    month = String.valueOf(selectedMonth);
+                    month = String.valueOf(selectedMonth + 1);
 
-                    day = day.length() == 1 ? "0" + selectedDay : "" + selectedDay;
-                    month = month.length() == 1 ? "0" + selectedMonth : "" + selectedMonth;
+                    day = day.length() == 1 ? "0" + day : "" + selectedDay;
+                    month = month.length() == 1 ? "0" + month : "" + selectedMonth;
                     choose_date_btn.setText(day + "/" + month + "/" + selectedYear);
 
                     date_task = selectedYear + "-" + month + "-" + day;
@@ -352,6 +352,7 @@ public class TaskCreation extends AppCompatActivity implements View.OnClickListe
 
             Task task_child = new Task(String.valueOf(et_name_task.getText()), duration_task, recurr_task, hour_task, number_rem_task, interval_task, type_task, user_id, day_week_task, date_task);
             bdd.CreateTask(task_child);
+            finish();
         }
     }
 }
