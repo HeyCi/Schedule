@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
@@ -26,9 +27,11 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
     Button btn_nxt;
     Button btn_prec;
     TextView txt_jour;
+    TextView txt_date;
     Calendar calendar;
     Database bdd;
     String childId;
+    SimpleDateFormat monformat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +42,12 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
         btn_nxt = findViewById(R.id.btn_nxt);
         btn_prec = findViewById(R.id.btn_prec);
         txt_jour = findViewById(R.id.txt_jour);
+        txt_date = findViewById(R.id.txt_date);
         calendar = Calendar.getInstance();
 
+        monformat = new SimpleDateFormat("dd/MM/yyyy");
         txt_jour.setText(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
+        txt_date.setText(monformat.format(calendar.getTime()));
 
         bdd = new Database();
         taskList = new ArrayList<>();
@@ -55,6 +61,8 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
         btn_add.setOnClickListener(this);
         btn_nxt.setOnClickListener(this);
         btn_prec.setOnClickListener(this);
+
+        getBddData();
     }
 
     @Override
@@ -66,10 +74,12 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
         } else if(view == btn_nxt) {
             calendar.add(Calendar.DATE, 1);
             txt_jour.setText(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
+            txt_date.setText(monformat.format(calendar.getTime()));
             getBddData();
         } else if (view == btn_prec) {
             calendar.add(Calendar.DATE, -1);
             txt_jour.setText(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
+            txt_date.setText(monformat.format(calendar.getTime()));
             getBddData();
         }
     }

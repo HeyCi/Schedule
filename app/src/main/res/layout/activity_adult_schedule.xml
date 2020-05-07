@@ -11,7 +11,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorPrimaryDark"
         android:orientation="horizontal">
 
         <Button
@@ -21,15 +20,31 @@
             android:layout_weight="1"
             android:text="prec" />
 
-        <TextView
-            android:id="@+id/txt_jour"
+        <LinearLayout
+            android:id="@+id/lyt_date"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="4"
             android:gravity="center"
-            android:text="Lundi"
-            android:textAllCaps="true"
-            android:textSize="24sp" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_jour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Lundi"
+                android:textAllCaps="true"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txt_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="TextView"
+                android:textSize="12sp" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/btn_nxt"

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
@@ -26,9 +27,11 @@ public class KidSchedule extends AppCompatActivity implements View.OnClickListen
     Button btn_next;
     Button btn_prec;
     TextView txt_jour;
+    TextView txt_date;
     Calendar calendar;
     Database bdd;
     String userId;
+    SimpleDateFormat monformat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,9 @@ public class KidSchedule extends AppCompatActivity implements View.OnClickListen
 
         userId = getIntent().getStringExtra("userID");
 
+        monformat = new SimpleDateFormat("dd/MM/yyyy");
         txt_jour.setText(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
+        txt_date.setText(monformat.format(calendar.getTime()));
 
         bdd = new Database();
         taskList = new ArrayList<>();
@@ -64,10 +69,12 @@ public class KidSchedule extends AppCompatActivity implements View.OnClickListen
         if(view == btn_next) {
             calendar.add(Calendar.DATE, 1);
             txt_jour.setText(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
+            txt_date.setText(monformat.format(calendar.getTime()));
             getBddData();
         } else if (view == btn_prec) {
             calendar.add(Calendar.DATE, -1);
             txt_jour.setText(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
+            txt_date.setText(monformat.format(calendar.getTime()));
             getBddData();
         }
     }
