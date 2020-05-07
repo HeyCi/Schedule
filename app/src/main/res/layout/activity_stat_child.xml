@@ -20,15 +20,32 @@
             android:layout_weight="1"
             android:text="prec" />
 
-        <TextView
-            android:id="@+id/txt_semaine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
+
+        <LinearLayout
+            android:id="@+id/lyt_week"
             android:gravity="center"
-            android:text="Lundi"
-            android:textAllCaps="true"
-            android:textSize="24sp" />
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="4">
+
+            <TextView
+                android:id="@+id/txt_semaine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Semaine"
+                android:textAllCaps="true"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/txt_interval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Du date au date"
+                android:textSize="12sp" />
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/btn_suiv"
@@ -39,81 +56,89 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="196dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:text="Nombre de tâches assignées" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10sp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/nb_task"
-        android:layout_width="194dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:text="0" />
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="292dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="Nombre de tâches assignées" />
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="128dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:text="Tâches terminées" />
+        <TextView
+            android:id="@+id/nb_task"
+            android:layout_width="194dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="0" />
 
-    <TextView
-        android:id="@+id/done_task"
-        android:layout_width="127dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:text="0" />
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="Tâches terminées" />
 
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="119dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:text="Tâches en retard" />
+        <TextView
+            android:id="@+id/done_task"
+            android:layout_width="127dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="0" />
 
-    <TextView
-        android:id="@+id/late_task"
-        android:layout_width="119dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:text="0" />
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="119dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="Tâches en retard" />
 
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="171dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:text="Pourcentage de réussite" />
+        <TextView
+            android:id="@+id/late_task"
+            android:layout_width="119dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="0" />
 
-    <TextView
-        android:id="@+id/percent_task"
-        android:layout_width="171dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:text="0 %" />
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="171dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="Pourcentage de réussite" />
 
-    <Button
-        android:id="@+id/btn_congrat"
-        android:layout_width="138dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Féliciter" />
+        <TextView
+            android:id="@+id/percent_task"
+            android:layout_width="171dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="0 %" />
 
-    <TextView
-        android:id="@+id/task_condition"
-        android:layout_width="378dp"
-        android:layout_height="wrap_content"
-        android:justificationMode="inter_word"
-        android:layout_gravity="center_horizontal" />
+        <Button
+            android:id="@+id/btn_congrat"
+            android:layout_width="138dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Féliciter" />
+
+        <TextView
+            android:id="@+id/task_condition"
+            android:layout_width="378dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:justificationMode="inter_word" />
+    </LinearLayout>
+
 </LinearLayout>
