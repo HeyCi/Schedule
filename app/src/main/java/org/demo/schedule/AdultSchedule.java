@@ -26,6 +26,7 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
     Button btn_add;
     Button btn_nxt;
     Button btn_prec;
+    Button btn_stat;
     TextView txt_jour;
     TextView txt_date;
     Calendar calendar;
@@ -41,6 +42,7 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
         btn_add = findViewById(R.id.btn_add_task);
         btn_nxt = findViewById(R.id.btn_nxt);
         btn_prec = findViewById(R.id.btn_prec);
+        btn_stat = findViewById(R.id.btn_stat);
         txt_jour = findViewById(R.id.txt_jour);
         txt_date = findViewById(R.id.txt_date);
         calendar = Calendar.getInstance();
@@ -61,7 +63,12 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
         btn_add.setOnClickListener(this);
         btn_nxt.setOnClickListener(this);
         btn_prec.setOnClickListener(this);
+        btn_stat.setOnClickListener(this);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         getBddData();
     }
 
@@ -81,6 +88,10 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
             txt_jour.setText(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
             txt_date.setText(monformat.format(calendar.getTime()));
             getBddData();
+        } else if (view == btn_stat) {
+            Intent intent = new Intent(this, StatChild.class);
+            intent.putExtra("kidtel", childId);
+            startActivity(intent);
         }
     }
 
