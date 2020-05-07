@@ -109,7 +109,12 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
                     if(taskCalendar.get(Calendar.DAY_OF_YEAR) == calendar.get(Calendar.DAY_OF_YEAR)) {
                         Task task = new Task(snapshot.child("name_task").getValue().toString());
                         task.setHour(snapshot.child("hour").getValue().toString());
+                        task.setType(snapshot.child("type").getValue().toString());
                         taskList.add(task);
+                        /*taskList.add(dataSnapshot.getValue(Task.class));
+                        for (Task matask : taskList) {
+                            Log.d("tache", matask.getName_task());
+                        }*/
                     }
                     adapter.notifyDataSetChanged();
                 }

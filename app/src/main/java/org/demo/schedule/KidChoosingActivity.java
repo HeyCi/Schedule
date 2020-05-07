@@ -37,7 +37,7 @@ public class KidChoosingActivity extends AppCompatActivity implements View.OnCli
         kidspinner = findViewById(R.id.kidspinner);
 
         prenomsEnfants = new ArrayList<>();
-        prenomsEnfants.add("Sélectionner");
+        prenomsEnfants.add("Sélectionner...");
 
         bdd = new Database();
         userId = getIntent().getStringExtra("userID");
@@ -73,7 +73,7 @@ public class KidChoosingActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View view) {
-        if(kidselected != "Sélectionner") {
+        if(kidselected != "Sélectionner...") {
             Intent intent = new Intent(this, AdultSchedule.class);
             intent.putExtra("kidtel", kidselected);
             startActivity(intent);

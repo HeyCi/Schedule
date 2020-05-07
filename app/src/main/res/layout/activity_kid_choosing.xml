@@ -26,7 +26,8 @@
             android:id="@+id/kidspinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10sp" />
+            android:padding="10sp"
+            android:popupBackground="@color/colorPrimaryDark" />
     </LinearLayout>
 
     <LinearLayout

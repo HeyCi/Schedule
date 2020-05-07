@@ -19,6 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorButton"
             android:text="prec" />
 
         <LinearLayout
@@ -36,6 +37,7 @@
                 android:gravity="center"
                 android:text="Lundi"
                 android:textAllCaps="true"
+                android:textColor="#000000"
                 android:textSize="20sp" />
 
             <TextView
@@ -44,6 +46,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="TextView"
+                android:textColor="#9F000000"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -52,6 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorButton"
             android:text="suiv" />
 
     </LinearLayout>

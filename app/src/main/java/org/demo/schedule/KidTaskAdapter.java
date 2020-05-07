@@ -3,6 +3,7 @@ package org.demo.schedule;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,6 +36,26 @@ public class KidTaskAdapter extends RecyclerView.Adapter<KidTaskAdapter.ViewHold
         final Task tache = taskList.get(position);
         holder.txt_tache.setText(tache.getName_task());
         holder.txt_hour.setText(tache.getHour());
+            switch (tache.getType()) {
+                case "quotidienne":
+                    holder.img_act.setImageResource(R.mipmap.img_viequot);
+                    break;
+                case "ponctuelle":
+                    holder.img_act.setImageResource(R.mipmap.img_ponct);
+                    break;
+                case "extrascolaire":
+                    holder.img_act.setImageResource(R.mipmap.img_extra);
+                    break;
+                case "scolaire":
+                    holder.img_act.setImageResource(R.mipmap.img_scol);
+                    break;
+                case "reveil":
+                    holder.img_act.setImageResource(R.mipmap.img_reveil);
+                    break;
+                case "butoire":
+                    holder.img_act.setImageResource(R.mipmap.img_butoire);
+                    break;
+        }
         holder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,6 +74,7 @@ public class KidTaskAdapter extends RecyclerView.Adapter<KidTaskAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView txt_tache;
         TextView txt_hour;
+        ImageView img_act;
         View root;
 
         public ViewHolder(@NonNull View itemView) {
@@ -60,6 +82,7 @@ public class KidTaskAdapter extends RecyclerView.Adapter<KidTaskAdapter.ViewHold
             root = itemView.findViewById(R.id.root);
             txt_tache = itemView.findViewById(R.id.txt_tache);
             txt_hour = itemView.findViewById(R.id.txt_hour);
+            img_act = itemView.findViewById(R.id.img_act);
         }
     }
 
