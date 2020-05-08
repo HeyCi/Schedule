@@ -1,5 +1,8 @@
 package org.demo.schedule;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
@@ -8,7 +11,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Database {
@@ -100,13 +105,49 @@ public class Database {
         return userToSend;
     }
 
-    public void setAlarmManager(final String childNumber){
+    public void setAlarmManager(final String childNumber, final Context context){
         final List<Task> taskList = new ArrayList<Task>();
         readData(userRef, new OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
+                SimpleDateFormat sdf;
+                String date, hour;
+                String nextDate = null, nextHour = null;
+                Date nextTask = null;
+                int dateI, hourI, dateNow, hourNow;
+                int dateS = 99999999;
+                int hourS = 9999;
+
+                Date today = new Date();
+                sdf = new SimpleDateFormat("yyyyMMdd");
+                dateNow = Integer.parseInt(sdf.format(today));
+                sdf = new SimpleDateFormat("HHmm");
+                hourNow = Integer.parseInt(sdf.format(today));
+
                 for(DataSnapshot data: dataSnapshot.child(childNumber).child("Task").getChildren()){
                     taskList.add(data.getValue(Task.class));
+                    date = data.child("date").getValue().toString();
+                    hour = data.child("hour").getValue().toString();
+                    dateI = Integer.parseInt(date.replaceAll("-", ""));
+                    hourI = Integer.parseInt(hour.replaceAll(":", ""));
+
+                    if((dateS > dateI || (dateS == dateI && hourS > hourI)) && (dateI > dateNow || (dateI == dateNow && hourI > hourNow))){
+                        dateS = dateI;
+                        hourS = hourI;
+                        nextDate = date;
+                        nextHour = hour;
+                    }
+                }
+                if(nextDate != null) {
+                    sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    try {
+                        nextTask = sdf.parse(nextDate + " " + nextHour + ":00");
+                    } catch (Exception e) {
+                    }
+
+                    long millis = nextTask.getTime();
+                    Alarm alarm = new Alarm();
+                    alarm.setAlarm(context, millis);
                 }
             }
 
