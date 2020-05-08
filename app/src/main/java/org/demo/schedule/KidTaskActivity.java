@@ -30,6 +30,7 @@ public class KidTaskActivity extends AppCompatActivity implements View.OnClickLi
         btn_fini = findViewById(R.id.btn_fini);
         img_act = findViewById(R.id.img_tache);
 
+        //todo changer pour ne récupérer que le nom de la tache et récupérer ensuite dans la bdd depuis prf + extra ?
         task = (Task)getIntent().getSerializableExtra("task");
 
         txt_titre.setText(task.getName_task());
