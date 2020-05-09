@@ -1,8 +1,7 @@
 package org.demo.schedule;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
@@ -82,6 +81,34 @@ public class Database {
         taskRef.child("date").setValue(task.getDate());
     }
 
+    public void CreateTaskSuccess(Task task){
+        DatabaseReference taskRef = userRef.child(task.getChildId()).child("TaskFailed").child(task.getName_task());
+        taskRef.child("name_task").setValue(task.getName_task());
+        taskRef.child("duration").setValue(task.getDuration());
+        taskRef.child("recurrence").setValue(task.getRecurrence());
+        taskRef.child("hour").setValue(task.getHour());
+        taskRef.child("numberOfReminder").setValue(task.getNumberOfReminder());
+        taskRef.child("reminderInterval").setValue(task.getReminderInterval());
+        taskRef.child("type").setValue(task.getType());
+        taskRef.child("childId").setValue(task.getChildId());
+        taskRef.child("dayOfTheWeek").setValue(task.getDayOfTheWeek());
+        taskRef.child("date").setValue(task.getDate());
+    }
+
+    public void CreateTaskFailed(Task task){
+        DatabaseReference taskRef = userRef.child(task.getChildId()).child("TaskSuccess").child(task.getName_task());
+        taskRef.child("name_task").setValue(task.getName_task());
+        taskRef.child("duration").setValue(task.getDuration());
+        taskRef.child("recurrence").setValue(task.getRecurrence());
+        taskRef.child("hour").setValue(task.getHour());
+        taskRef.child("numberOfReminder").setValue(task.getNumberOfReminder());
+        taskRef.child("reminderInterval").setValue(task.getReminderInterval());
+        taskRef.child("type").setValue(task.getType());
+        taskRef.child("childId").setValue(task.getChildId());
+        taskRef.child("dayOfTheWeek").setValue(task.getDayOfTheWeek());
+        taskRef.child("date").setValue(task.getDate());
+    }
+
     public User GetUser(String id){
         DatabaseReference ref = userRef.child(id);
         final User userToSend = new User();
@@ -113,6 +140,7 @@ public class Database {
                 SimpleDateFormat sdf;
                 String date, hour;
                 String nextDate = null, nextHour = null;
+                String name = null;
                 Date nextTask = null;
                 int dateI, hourI, dateNow, hourNow;
                 int dateS = 99999999;
@@ -136,16 +164,20 @@ public class Database {
                         hourS = hourI;
                         nextDate = date;
                         nextHour = hour;
+                        name = data.child("name_task").getValue().toString();
                     }
                 }
-                if(nextDate != null) {
+                if(name != null) {
                     sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     try {
                         nextTask = sdf.parse(nextDate + " " + nextHour + ":00");
                     } catch (Exception e) {
                     }
-
                     long millis = nextTask.getTime();
+                    SharedPreferences prefs = context.getSharedPreferences("task", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString("name", name);
+                    editor.commit();
                     Alarm alarm = new Alarm();
                     alarm.setAlarm(context, millis);
                 }

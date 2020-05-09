@@ -29,7 +29,6 @@ public class AccountCreationActivity extends AppCompatActivity implements View.O
         setContentView(R.layout.activity_account_creation);
 
         bdd = new Database();
-
         rw_kidaccount = findViewById(R.id.rw_kidaccount);
         btn_add_kid = findViewById(R.id.btn_add_kid);
         btn_create = findViewById(R.id.btn_create_accounts);
