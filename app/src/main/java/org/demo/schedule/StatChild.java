@@ -1,7 +1,9 @@
 package org.demo.schedule;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -46,6 +48,8 @@ public class StatChild extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stat_child);
 
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.SEND_SMS}, 0);
 
         calendar = Calendar.getInstance();
         calendar_fd = Calendar.getInstance();
