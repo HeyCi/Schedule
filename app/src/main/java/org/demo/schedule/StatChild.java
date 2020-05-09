@@ -100,21 +100,22 @@ public class StatChild extends AppCompatActivity implements View.OnClickListener
             manager.sendTextMessage(child_tel, null, message, null, null);
             Toast.makeText(this, "Notification envoyée !", Toast.LENGTH_SHORT).show();
         }
-        else if(v == btn_suivant) {
-            calendar.add(Calendar.WEEK_OF_YEAR, 1);
-            txt_sem.setText("Semaine " + calendar.get(Calendar.WEEK_OF_YEAR));
-            //calendar_fd.add(Calendar.DAY_OF_MONTH, 1);
-            //calendar_ld.add(Calendar.DAY_OF_MONTH, 8);
-            txt_int.setText("Du " + monformat.format(calendar_fd.getTime()) + " au " + monformat.format(calendar_ld.getTime()));
-        }
         else if(v == btn_precedent) {
             calendar.add(Calendar.WEEK_OF_YEAR, -1);
             txt_sem.setText("Semaine " + calendar.get(Calendar.WEEK_OF_YEAR));
-            //calendar_fd.add(calendar_fd.get(Calendar.WEEK_OF_YEAR), -1);
-            //calendar_fd.add(calendar_fd.getFirstDayOfWeek(), 0);
-            //calendar_ld.add(calendar_ld.get(Calendar.WEEK_OF_YEAR), -1);
-            //calendar_fd.add(calendar_ld.getFirstDayOfWeek(), 6);
+            calendar_fd.add(Calendar.WEEK_OF_YEAR, -1);
+            calendar_ld.add(Calendar.WEEK_OF_YEAR, -1);
+
             txt_int.setText("Du " + monformat.format(calendar_fd.getTime()) + " au " + monformat.format(calendar_ld.getTime()));
         }
+        else if(v == btn_suivant) {
+            calendar.add(Calendar.WEEK_OF_YEAR, 1);
+            txt_sem.setText("Semaine " + calendar.get(Calendar.WEEK_OF_YEAR));
+            calendar_fd.add(Calendar.WEEK_OF_YEAR, 1);
+            calendar_ld.add(Calendar.WEEK_OF_YEAR, 1);
+
+            txt_int.setText("Du " + monformat.format(calendar_fd.getTime()) + " au " + monformat.format(calendar_ld.getTime()));
+        }
+
     }
 }
