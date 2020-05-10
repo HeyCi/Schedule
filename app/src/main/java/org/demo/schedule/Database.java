@@ -151,12 +151,14 @@ public class Database {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(new Date());
             int day = calendar.get(Calendar.DAY_OF_WEEK);
+            if (day == 1) day = 7;
+            else day --;
             int nextDay = 0;
             for (int i = day+1; i <= 7; i++) {
                 nextDay++;
-                if(dayOfTheWeek.charAt(i) == '_'){
+                if(dayOfTheWeek.charAt(i) != '_'){
                     sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    task.setDayOfTheWeek(sdf.format(new Date(System.currentTimeMillis()+(86400000 * nextDay))));
+                    task.setDate(sdf.format(new Date(System.currentTimeMillis()+(86400000 * nextDay))));
                     CreateTask(task);
                     return;
 
@@ -164,9 +166,9 @@ public class Database {
             }
             for (int i = 0; i <= day; i++) {
                 nextDay++;
-                if(dayOfTheWeek.charAt(i) == '_'){
+                if(dayOfTheWeek.charAt(i) != '_'){
                     sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    task.setDayOfTheWeek(sdf.format(new Date(System.currentTimeMillis()+(86400000 * nextDay))));
+                    task.setDate(sdf.format(new Date(System.currentTimeMillis()+(86400000 * nextDay))));
                     CreateTask(task);
                     return;
                 }
