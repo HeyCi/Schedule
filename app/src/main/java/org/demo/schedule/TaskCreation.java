@@ -268,19 +268,16 @@ public class TaskCreation extends AppCompatActivity implements View.OnClickListe
             if (!is_pushed_lun) {
                 is_pushed_lun = true;
                 day_week[0] = "L";
-                //Log.d("Lundi c'est bon " + day_week[0], "success");
                 choose_lun_btn.getBackground().setColorFilter(Color.parseColor("#ACED9A"), PorterDuff.Mode.SRC_ATOP);
             } else {
                 is_pushed_lun = false;
                 day_week[0] = "_";
-                //Log.d("Lundi ça va plus " + day_week[0], "success");
                 choose_lun_btn.getBackground().setColorFilter(Color.parseColor("#85A4AE"), PorterDuff.Mode.SRC_ATOP);
             }
         } else if (v.getId() == R.id.btn_mar) {
             if (!is_pushed_mar) {
                 is_pushed_mar = true;
                 day_week[1] = "M";
-                //Log.d("Mardi c'est bon " + day_week[1], "success");
                 choose_mar_btn.getBackground().setColorFilter(Color.parseColor("#ACED9A"), PorterDuff.Mode.SRC_ATOP);
             } else {
                 is_pushed_mar = false;
@@ -291,7 +288,6 @@ public class TaskCreation extends AppCompatActivity implements View.OnClickListe
             if (!is_pushed_mer) {
                 is_pushed_mer = true;
                 day_week[2] = "M";
-                //Log.d("Mercredi c'est bon " + day_week[0], "success");
                 choose_mer_btn.getBackground().setColorFilter(Color.parseColor("#ACED9A"), PorterDuff.Mode.SRC_ATOP);
             } else {
                 is_pushed_mer = false;
@@ -302,7 +298,6 @@ public class TaskCreation extends AppCompatActivity implements View.OnClickListe
             if (!is_pushed_jeu) {
                 is_pushed_jeu = true;
                 day_week[3] = "J";
-                //Log.d("Jeudi c'est bon " + day_week[0], "success");
                 choose_jeu_btn.getBackground().setColorFilter(Color.parseColor("#ACED9A"), PorterDuff.Mode.SRC_ATOP);
             } else {
                 is_pushed_jeu = false;
@@ -313,7 +308,6 @@ public class TaskCreation extends AppCompatActivity implements View.OnClickListe
             if (!is_pushed_ven) {
                 is_pushed_ven = true;
                 day_week[4] = "V";
-                //Log.d("Vendredi c'est bon " + day_week[0], "success");
                 choose_ven_btn.getBackground().setColorFilter(Color.parseColor("#ACED9A"), PorterDuff.Mode.SRC_ATOP);
             } else {
                 is_pushed_ven = false;
@@ -324,7 +318,6 @@ public class TaskCreation extends AppCompatActivity implements View.OnClickListe
             if (!is_pushed_sam) {
                 is_pushed_sam = true;
                 day_week[5] = "S";
-                //Log.d("Samedi c'est bon " + day_week[0], "success");
                 choose_sam_btn.getBackground().setColorFilter(Color.parseColor("#ACED9A"), PorterDuff.Mode.SRC_ATOP);
             } else {
                 is_pushed_sam = false;
@@ -335,7 +328,6 @@ public class TaskCreation extends AppCompatActivity implements View.OnClickListe
             if (!is_pushed_dim) {
                 is_pushed_dim = true;
                 day_week[6] = "D";
-                //Log.d("Dimanche c'est bon " + day_week[0], "success");
                 choose_dim_btn.getBackground().setColorFilter(Color.parseColor("#ACED9A"), PorterDuff.Mode.SRC_ATOP);
             } else {
                 is_pushed_dim = false;
