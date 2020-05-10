@@ -108,7 +108,7 @@ public class Database {
             if (day == 1) day = 7;
             else day --;
             int nextDay = 0;
-            for (int i = day+1; i <= 7; i++) {
+            for (int i = day; i < 7; i++) {
                 nextDay++;
                 if(dayOfTheWeek.charAt(i) != '_'){
                     sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -118,7 +118,7 @@ public class Database {
 
                 }
             }
-            for (int i = 0; i <= day; i++) {
+            for (int i = 0; i < day; i++) {
                 nextDay++;
                 if(dayOfTheWeek.charAt(i) != '_'){
                     sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -154,7 +154,7 @@ public class Database {
             if (day == 1) day = 7;
             else day --;
             int nextDay = 0;
-            for (int i = day+1; i <= 7; i++) {
+            for (int i = day; i < 7; i++) {
                 nextDay++;
                 if(dayOfTheWeek.charAt(i) != '_'){
                     sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -164,7 +164,7 @@ public class Database {
 
                 }
             }
-            for (int i = 0; i <= day; i++) {
+            for (int i = 0; i < day; i++) {
                 nextDay++;
                 if(dayOfTheWeek.charAt(i) != '_'){
                     sdf = new SimpleDateFormat("yyyy-MM-dd");

@@ -38,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
         SharedPreferences prefs = this.getSharedPreferences("login", Context.MODE_PRIVATE);
+        Task t = new Task("test", "00:15", "0k", "20:00", 5, "5","quotidienne", "0659025246", "______D", "2020-05-10");
+        bdd = new Database();
+        bdd.CreateTask(t);
+        bdd.CreateTaskSuccess(t);
+        bdd.CreateTaskFailed(t);
         if(prefs.contains("tel")) {
             userId = prefs.getString("tel", null);
             bdd = new Database();
