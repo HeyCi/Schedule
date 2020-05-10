@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         intent.putExtra("userID", userId);
                         startActivity(intent);
                     } else if (type.equals("enfant")) {
-                        bdd.setAlarmManager(userId, context);
                         Intent intent = new Intent(context, KidSchedule.class);
                         intent.putExtra("userID", userId);
                         startActivity(intent);
