@@ -7,6 +7,23 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="25sp"
+        app:srcCompat="@mipmap/schedule_launcher" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Schedule"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
     <Button
         android:id="@+id/btn_la"
         android:layout_width="match_parent"
