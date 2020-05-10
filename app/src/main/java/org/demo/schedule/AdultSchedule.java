@@ -16,6 +16,7 @@ import com.google.firebase.database.DataSnapshot;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Locale;
 
 public class AdultSchedule extends AppCompatActivity implements View.OnClickListener {
@@ -116,6 +117,7 @@ public class AdultSchedule extends AppCompatActivity implements View.OnClickList
                             Log.d("tache", matask.getName_task());
                         }*/
                     }
+                    Collections.sort(taskList);
                     adapter.notifyDataSetChanged();
                 }
             }

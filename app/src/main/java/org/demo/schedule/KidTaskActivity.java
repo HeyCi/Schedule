@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 
@@ -97,9 +96,9 @@ public class KidTaskActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
         if(view == btn_afinir) {
-            Toast.makeText(this, "tache pas finie", Toast.LENGTH_LONG).show();
+            bdd.CreateTaskFailed(task);
         } else if(view == btn_fini) {
-            Toast.makeText(this, "tache finie, bravo !", Toast.LENGTH_LONG).show();
+            bdd.CreateTaskSuccess(task);
         }
     }
 }
