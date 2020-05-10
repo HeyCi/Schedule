@@ -143,7 +143,7 @@ public class Database {
         taskRef.child("dayOfTheWeek").setValue(task.getDayOfTheWeek());
         taskRef.child("date").setValue(task.getDate());
         String dayOfTheWeek = task.getDayOfTheWeek();
-        if(task.getDayOfTheWeek() != "_______"){
+        if(task.getDayOfTheWeek() == "_______"){
             userRef.child(task.getChildId()).child("Task").child(task.getName_task()).removeValue();
         }
         else{
