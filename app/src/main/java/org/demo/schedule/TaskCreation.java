@@ -6,6 +6,9 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +21,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -91,6 +95,13 @@ public class TaskCreation extends AppCompatActivity implements View.OnClickListe
                     case 0:
                         findViewById(R.id.linear_dw).setVisibility(View.GONE);
                         type_task = "quotidienne";
+                        day_week[0] = "L";
+                        day_week[1] = "M";
+                        day_week[2] = "M";
+                        day_week[3] = "J";
+                        day_week[4] = "V";
+                        day_week[5] = "S";
+                        day_week[6] = "D";
                         break;
                     case 1:
                         findViewById(R.id.linear_dw).setVisibility(View.VISIBLE);
@@ -254,105 +265,105 @@ public class TaskCreation extends AppCompatActivity implements View.OnClickListe
             time_picker_dialog.show();
 
         } else if (v.getId() == R.id.btn_lun) {
-            //int basic_color_btn = getResources().getColor(R.color.colorButton);
-            Log.d("state : OUI", "OKOUIOUI");
-            //Log.d("couleur : " + color_btn, "SUCCESS");
             if (!is_pushed_lun) {
                 is_pushed_lun = true;
                 day_week[0] = "L";
-                Log.d("Lundi c'est bon " + day_week[0], "success");
+                //Log.d("Lundi c'est bon " + day_week[0], "success");
+                choose_lun_btn.getBackground().setColorFilter(Color.parseColor("#ACED9A"), PorterDuff.Mode.SRC_ATOP);
             } else {
                 is_pushed_lun = false;
-                Log.d("Lundi ça va plus " + day_week[0], "success");
+                day_week[0] = "_";
+                //Log.d("Lundi ça va plus " + day_week[0], "success");
+                choose_lun_btn.getBackground().setColorFilter(Color.parseColor("#85A4AE"), PorterDuff.Mode.SRC_ATOP);
             }
         } else if (v.getId() == R.id.btn_mar) {
-            //int basic_color_btn = getResources().getColor(R.color.colorButton);
-            //Log.d("state : OUI", "OKOUIOUI");
-            //Log.d("couleur : " + color_btn, "SUCCESS");
             if (!is_pushed_mar) {
                 is_pushed_mar = true;
                 day_week[1] = "M";
-                Log.d("Mardi c'est bon " + day_week[1], "success");
+                //Log.d("Mardi c'est bon " + day_week[1], "success");
+                choose_mar_btn.getBackground().setColorFilter(Color.parseColor("#ACED9A"), PorterDuff.Mode.SRC_ATOP);
             } else {
                 is_pushed_mar = false;
+                day_week[1] = "_";
+                choose_mar_btn.getBackground().setColorFilter(Color.parseColor("#85A4AE"), PorterDuff.Mode.SRC_ATOP);
             }
         } else if (v.getId() == R.id.btn_mer) {
-            //int basic_color_btn = getResources().getColor(R.color.colorButton);
-            //Log.d("state : OUI", "OKOUIOUI");
-            //Log.d("couleur : " + color_btn, "SUCCESS");
             if (!is_pushed_mer) {
                 is_pushed_mer = true;
                 day_week[2] = "M";
-                Log.d("Mercredi c'est bon " + day_week[0], "success");
+                //Log.d("Mercredi c'est bon " + day_week[0], "success");
+                choose_mer_btn.getBackground().setColorFilter(Color.parseColor("#ACED9A"), PorterDuff.Mode.SRC_ATOP);
             } else {
                 is_pushed_mer = false;
+                day_week[2] = "_";
+                choose_mer_btn.getBackground().setColorFilter(Color.parseColor("#85A4AE"), PorterDuff.Mode.SRC_ATOP);
             }
         } else if (v.getId() == R.id.btn_jeu) {
-            //int basic_color_btn = getResources().getColor(R.color.colorButton);
-            //Log.d("state : OUI", "OKOUIOUI");
-            //Log.d("couleur : " + color_btn, "SUCCESS");
             if (!is_pushed_jeu) {
                 is_pushed_jeu = true;
                 day_week[3] = "J";
-                Log.d("Jeudi c'est bon " + day_week[0], "success");
+                //Log.d("Jeudi c'est bon " + day_week[0], "success");
+                choose_jeu_btn.getBackground().setColorFilter(Color.parseColor("#ACED9A"), PorterDuff.Mode.SRC_ATOP);
             } else {
                 is_pushed_jeu = false;
+                day_week[3] = "_";
+                choose_jeu_btn.getBackground().setColorFilter(Color.parseColor("#85A4AE"), PorterDuff.Mode.SRC_ATOP);
             }
         } else if (v.getId() == R.id.btn_ven) {
-            //int basic_color_btn = getResources().getColor(R.color.colorButton);
-            //Log.d("state : OUI", "OKOUIOUI");
-            //Log.d("couleur : " + color_btn, "SUCCESS");
             if (!is_pushed_ven) {
                 is_pushed_ven = true;
                 day_week[4] = "V";
-                Log.d("Vendredi c'est bon " + day_week[0], "success");
+                //Log.d("Vendredi c'est bon " + day_week[0], "success");
+                choose_ven_btn.getBackground().setColorFilter(Color.parseColor("#ACED9A"), PorterDuff.Mode.SRC_ATOP);
             } else {
                 is_pushed_ven = false;
+                day_week[4] = "_";
+                choose_ven_btn.getBackground().setColorFilter(Color.parseColor("#85A4AE"), PorterDuff.Mode.SRC_ATOP);
             }
         } else if (v.getId() == R.id.btn_sam) {
-            //int basic_color_btn = getResources().getColor(R.color.colorButton);
-            //Log.d("state : OUI", "OKOUIOUI");
-            //Log.d("couleur : " + color_btn, "SUCCESS");
             if (!is_pushed_sam) {
                 is_pushed_sam = true;
                 day_week[5] = "S";
-                Log.d("Samedi c'est bon " + day_week[0], "success");
+                //Log.d("Samedi c'est bon " + day_week[0], "success");
+                choose_sam_btn.getBackground().setColorFilter(Color.parseColor("#ACED9A"), PorterDuff.Mode.SRC_ATOP);
             } else {
                 is_pushed_sam = false;
+                day_week[5] = "_";
+                choose_sam_btn.getBackground().setColorFilter(Color.parseColor("#85A4AE"), PorterDuff.Mode.SRC_ATOP);
             }
         } else if (v.getId() == R.id.btn_dim) {
-            //int basic_color_btn = getResources().getColor(R.color.colorButton);
-            //Log.d("state : OUI", "OKOUIOUI");
-            //Log.d("couleur : " + color_btn, "SUCCESS");
             if (!is_pushed_dim) {
                 is_pushed_dim = true;
                 day_week[6] = "D";
-                Log.d("Dimanche c'est bon " + day_week[0], "success");
+                //Log.d("Dimanche c'est bon " + day_week[0], "success");
+                choose_dim_btn.getBackground().setColorFilter(Color.parseColor("#ACED9A"), PorterDuff.Mode.SRC_ATOP);
             } else {
                 is_pushed_dim = false;
+                day_week[6] = "_";
+                choose_dim_btn.getBackground().setColorFilter(Color.parseColor("#85A4AE"), PorterDuff.Mode.SRC_ATOP);
             }
         } else if (v.getId() == R.id.btn_create_task) {
-            if(TextUtils.isEmpty(day_week[0])) day_week[0] = "_";
-            if(TextUtils.isEmpty(day_week[1])) day_week[1] = "_";
-            if(TextUtils.isEmpty(day_week[2])) day_week[2] = "_";
-            if(TextUtils.isEmpty(day_week[3])) day_week[3] = "_";
-            if(TextUtils.isEmpty(day_week[4])) day_week[4] = "_";
-            if(TextUtils.isEmpty(day_week[5])) day_week[5] = "_";
-            if(TextUtils.isEmpty(day_week[6])) day_week[6] = "_";
-
-            Log.d("name_task" + et_name_task, "success");
-            Log.d("type : " + type_task, "ok");
-            Log.d("date : " + date_task, "ok");
-            Log.d("heure : " + hour_task, "ok");
-            Log.d("durée : " + duration_task, "ok");
+            for(int i = 0; i < 7; i++) {
+                if(TextUtils.isEmpty(day_week[i])) day_week[i] = "_";
+            }
             day_week_task = TextUtils.join("", day_week);
-            Log.d("" + day_week_task, "Success");
-            Log.d("nombre de rappels : " + number_rem_task, "ok");
-            Log.d("rappelinterval : " + interval_task, "ok");
+            Log.d("" + day_week_task, "SUCCESS");
 
-            Task task_child = new Task(String.valueOf(et_name_task.getText()), duration_task, recurr_task, hour_task, number_rem_task, interval_task, type_task, user_id, day_week_task, date_task);
-            bdd.CreateTask(task_child);
-            finish();
+            if(duration_task == null || hour_task == null || date_task == null) {
+                Toast.makeText(this, "Veuillez remplir tous les champs.", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                if(number_rem_task == null) {
+                    number_rem_task = 1;
+                }
+                if(interval_task == null) {
+                    interval_task = "5";
+                }
+
+                Task task_child = new Task(String.valueOf(et_name_task.getText()), duration_task, recurr_task, hour_task, number_rem_task, interval_task, type_task, user_id, day_week_task, date_task);
+                bdd.CreateTask(task_child);
+                finish();
+            }
         }
     }
 }
