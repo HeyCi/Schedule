@@ -11,7 +11,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -68,6 +70,7 @@ public class Database {
     }
 
     public void CreateTask(Task task){
+
         DatabaseReference taskRef = userRef.child(task.getChildId()).child("Task").child(task.getName_task());
         taskRef.child("name_task").setValue(task.getName_task());
         taskRef.child("duration").setValue(task.getDuration());
@@ -82,20 +85,6 @@ public class Database {
     }
 
     public void CreateTaskSuccess(Task task){
-        DatabaseReference taskRef = userRef.child(task.getChildId()).child("TaskFailed").child(task.getName_task());
-        taskRef.child("name_task").setValue(task.getName_task());
-        taskRef.child("duration").setValue(task.getDuration());
-        taskRef.child("recurrence").setValue(task.getRecurrence());
-        taskRef.child("hour").setValue(task.getHour());
-        taskRef.child("numberOfReminder").setValue(task.getNumberOfReminder());
-        taskRef.child("reminderInterval").setValue(task.getReminderInterval());
-        taskRef.child("type").setValue(task.getType());
-        taskRef.child("childId").setValue(task.getChildId());
-        taskRef.child("dayOfTheWeek").setValue(task.getDayOfTheWeek());
-        taskRef.child("date").setValue(task.getDate());
-    }
-
-    public void CreateTaskFailed(Task task){
         DatabaseReference taskRef = userRef.child(task.getChildId()).child("TaskSuccess").child(task.getName_task());
         taskRef.child("name_task").setValue(task.getName_task());
         taskRef.child("duration").setValue(task.getDuration());
@@ -107,6 +96,82 @@ public class Database {
         taskRef.child("childId").setValue(task.getChildId());
         taskRef.child("dayOfTheWeek").setValue(task.getDayOfTheWeek());
         taskRef.child("date").setValue(task.getDate());
+        String dayOfTheWeek = task.getDayOfTheWeek();
+        if(task.getDayOfTheWeek() == "_______"){
+            userRef.child(task.getChildId()).child("Task").child(task.getName_task()).removeValue();
+        }
+        else{
+            SimpleDateFormat sdf;
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(new Date());
+            int day = calendar.get(Calendar.DAY_OF_WEEK);
+            if (day == 1) day = 7;
+            else day --;
+            int nextDay = 0;
+            for (int i = day+1; i <= 7; i++) {
+                nextDay++;
+                if(dayOfTheWeek.charAt(i) != '_'){
+                    sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    task.setDate(sdf.format(new Date(System.currentTimeMillis()+(86400000 * nextDay))));
+                    CreateTask(task);
+                    return;
+
+                }
+            }
+            for (int i = 0; i <= day; i++) {
+                nextDay++;
+                if(dayOfTheWeek.charAt(i) != '_'){
+                    sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    task.setDate(sdf.format(new Date(System.currentTimeMillis()+(86400000 * nextDay))));
+                    CreateTask(task);
+                    return;
+                }
+            }
+        }
+    }
+
+    public void CreateTaskFailed(Task task){
+        DatabaseReference taskRef = userRef.child(task.getChildId()).child("TaskFailed").child(task.getName_task());
+        taskRef.child("name_task").setValue(task.getName_task());
+        taskRef.child("duration").setValue(task.getDuration());
+        taskRef.child("recurrence").setValue(task.getRecurrence());
+        taskRef.child("hour").setValue(task.getHour());
+        taskRef.child("numberOfReminder").setValue(task.getNumberOfReminder());
+        taskRef.child("reminderInterval").setValue(task.getReminderInterval());
+        taskRef.child("type").setValue(task.getType());
+        taskRef.child("childId").setValue(task.getChildId());
+        taskRef.child("dayOfTheWeek").setValue(task.getDayOfTheWeek());
+        taskRef.child("date").setValue(task.getDate());
+        String dayOfTheWeek = task.getDayOfTheWeek();
+        if(task.getDayOfTheWeek() != "_______"){
+            userRef.child(task.getChildId()).child("Task").child(task.getName_task()).removeValue();
+        }
+        else{
+            SimpleDateFormat sdf;
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(new Date());
+            int day = calendar.get(Calendar.DAY_OF_WEEK);
+            int nextDay = 0;
+            for (int i = day+1; i <= 7; i++) {
+                nextDay++;
+                if(dayOfTheWeek.charAt(i) == '_'){
+                    sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    task.setDayOfTheWeek(sdf.format(new Date(System.currentTimeMillis()+(86400000 * nextDay))));
+                    CreateTask(task);
+                    return;
+
+                }
+            }
+            for (int i = 0; i <= day; i++) {
+                nextDay++;
+                if(dayOfTheWeek.charAt(i) == '_'){
+                    sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    task.setDayOfTheWeek(sdf.format(new Date(System.currentTimeMillis()+(86400000 * nextDay))));
+                    CreateTask(task);
+                    return;
+                }
+            }
+        }
     }
 
     public User GetUser(String id){
