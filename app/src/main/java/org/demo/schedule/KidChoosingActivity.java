@@ -73,7 +73,7 @@ public class KidChoosingActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View view) {
-        if(kidselected != "Sélectionner...") {
+        if(!kidselected.equals("Sélectionner...")) {
             Intent intent = new Intent(this, AdultSchedule.class);
             intent.putExtra("kidtel", kidselected);
             startActivity(intent);

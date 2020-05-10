@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -41,6 +43,7 @@ public class KidSchedule extends AppCompatActivity implements View.OnClickListen
         btn_next = findViewById(R.id.btn_nxt);
         btn_prec = findViewById(R.id.btn_prec);
         txt_jour = findViewById(R.id.txt_jour);
+        txt_date = findViewById(R.id.txt_date);
         calendar = Calendar.getInstance();
 
         userId = getIntent().getStringExtra("userID");
@@ -115,7 +118,10 @@ public class KidSchedule extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onTaskClick(Task task, int position) {
         Intent intent = new Intent(this, KidTaskActivity.class);
-        intent.putExtra("task", task);
+        SharedPreferences prefs = this.getSharedPreferences("task", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("name", task.getName_task());
+        editor.commit();
         startActivity(intent);
     }
 }

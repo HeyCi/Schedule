@@ -26,7 +26,6 @@ public class Alarm extends BroadcastReceiver
         wl.acquire();
 
         // Put here YOUR code.
-        Toast.makeText(context, taskName, Toast.LENGTH_LONG).show(); // For example
         NotificationUtils.createNotification(context, taskName);
 
         wl.release();

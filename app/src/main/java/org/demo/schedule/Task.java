@@ -1,8 +1,6 @@
 package org.demo.schedule;
 
-import java.io.Serializable;
-
-public class Task implements Serializable {
+public class Task {
     private String name_task;
     private String duration;
     private String recurrence;
