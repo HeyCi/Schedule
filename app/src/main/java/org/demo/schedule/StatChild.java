@@ -13,7 +13,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -21,27 +25,24 @@ import java.util.Locale;
 
 public class StatChild extends AppCompatActivity implements View.OnClickListener {
 
-    Locale locale;
     Calendar calendar;
     Calendar calendar_fd;
     Calendar calendar_ld;
     SimpleDateFormat monformat;
     TextView txt_sem;
     TextView txt_int;
-    Date first_day_of_week;
-    Date last_day_of_week;
     TextView et_nb_task;
     TextView et_done_task;
     TextView et_late_task;
     TextView et_percent_task;
     TextView et_congrat_condition;
     Button btn_congrat, btn_precedent, btn_suivant;
-    float percent;
-    int task_nb = 20;
-    int task_done = 16;
-    int task_late = 4;
-    String child_tel;
+    float percent = 0;
+    String childId;
     String message;
+    Database bdd;
+    ArrayList<Task> successed_task, failed_task;
+    Integer success_count = 0, failed_count = 0, total_count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,8 @@ public class StatChild extends AppCompatActivity implements View.OnClickListener
 
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.SEND_SMS}, 0);
+
+        bdd = new Database();
 
         calendar = Calendar.getInstance();
         calendar_fd = Calendar.getInstance();
@@ -69,8 +72,10 @@ public class StatChild extends AppCompatActivity implements View.OnClickListener
         btn_congrat.setOnClickListener(this);
         String valid_task = "Les conditions sont remplies pour être fier de votre enfant. Félicitez-le !";
         String invalid_task = "Les conditions requises ne sont pas remplies. Votre enfant doit bénéficier de plus de 80% de tâches complétées.";
-        child_tel = getIntent().getStringExtra("kidtel");
+        childId = getIntent().getStringExtra("kidtel");
         message = "Félicitations mon enfant, je suis fier de toi.";
+
+        total_count = success_count + failed_count;
         monformat = new SimpleDateFormat("dd/MM/yyyy");
 
         calendar_fd.add(Calendar.DAY_OF_MONTH, Calendar.MONDAY-calendar_fd.get(Calendar.DAY_OF_WEEK));
@@ -78,11 +83,12 @@ public class StatChild extends AppCompatActivity implements View.OnClickListener
         txt_sem.setText("Semaine " + calendar.get(Calendar.WEEK_OF_YEAR));
         txt_int.setText("Du " + monformat.format(calendar_fd.getTime()) + " au " + monformat.format(calendar_ld.getTime()));
 
-        et_nb_task.setText(String.valueOf(task_nb));
-        et_done_task.setText(String.valueOf(task_done));
-        et_late_task.setText(String.valueOf(task_late));
-        percent = ((float)task_done / task_nb) * 100;
-        Log.d("" + percent, "SECfb");
+        et_nb_task.setText(String.valueOf(total_count));
+        et_done_task.setText(String.valueOf(success_count));
+        et_late_task.setText(String.valueOf(failed_count));
+        if(total_count != 0) {
+            percent = ((float)success_count / total_count) * 100;
+        }
         et_percent_task.setText(percent + " %");
 
         if(percent < 80) {
@@ -98,10 +104,16 @@ public class StatChild extends AppCompatActivity implements View.OnClickListener
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        getBddData();
+    }
+
+    @Override
     public void onClick(View v) {
         if(v == btn_congrat) {
             SmsManager manager = SmsManager.getDefault();
-            manager.sendTextMessage(child_tel, null, message, null, null);
+            manager.sendTextMessage(childId, null, message, null, null);
             Toast.makeText(this, "Notification envoyée !", Toast.LENGTH_SHORT).show();
         }
         else if(v == btn_precedent) {
@@ -111,6 +123,15 @@ public class StatChild extends AppCompatActivity implements View.OnClickListener
             calendar_ld.add(Calendar.WEEK_OF_YEAR, -1);
 
             txt_int.setText("Du " + monformat.format(calendar_fd.getTime()) + " au " + monformat.format(calendar_ld.getTime()));
+
+            getBddData();
+            et_nb_task.setText(String.valueOf(total_count));
+            et_done_task.setText(String.valueOf(success_count));
+            et_late_task.setText(String.valueOf(failed_count));
+            if(total_count != 0) {
+                percent = ((float)success_count / total_count) * 100;
+            }
+            et_percent_task.setText(percent + " %");
         }
         else if(v == btn_suivant) {
             calendar.add(Calendar.WEEK_OF_YEAR, 1);
@@ -119,7 +140,53 @@ public class StatChild extends AppCompatActivity implements View.OnClickListener
             calendar_ld.add(Calendar.WEEK_OF_YEAR, 1);
 
             txt_int.setText("Du " + monformat.format(calendar_fd.getTime()) + " au " + monformat.format(calendar_ld.getTime()));
+
+            getBddData();
+            et_nb_task.setText(String.valueOf(total_count));
+            et_done_task.setText(String.valueOf(success_count));
+            et_late_task.setText(String.valueOf(failed_count));
+            if(total_count != 0) {
+                percent = ((float)success_count / total_count) * 100;
+            }
+            et_percent_task.setText(percent + " %");
         }
 
+    }
+
+    public void getBddData() {
+            bdd.readData(bdd.getUserRef().child(childId), new OnGetDataListener() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.child("TaskSuccess").exists()) {
+                    for (DataSnapshot data : dataSnapshot.child("TaskSuccess").getChildren()) {
+                        successed_task.add(data.getValue(Task.class));
+                    }
+                    success_count = successed_task.size();
+                }
+                else {
+                    success_count = 0;
+                }
+                if(dataSnapshot.child("TaskFailed").exists()) {
+                    for (DataSnapshot data : dataSnapshot.child("TaskFailed").getChildren()) {
+                        failed_task.add(data.getValue(Task.class));
+                    }
+                    failed_count = failed_task.size();
+                }
+                else {
+                    failed_count = 0;
+                }
+            }
+
+            @Override
+            public void onStart() {
+                Log.d("ONSTART", "Started");
+            }
+
+            @Override
+            public void onFailure() {
+                Log.d("onFailure", "Failed");
+            }
+        });
     }
 }

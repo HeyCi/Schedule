@@ -339,7 +339,6 @@ public class TaskCreation extends AppCompatActivity implements View.OnClickListe
                 if(TextUtils.isEmpty(day_week[i])) day_week[i] = "_";
             }
             day_week_task = TextUtils.join("", day_week);
-            Log.d("" + day_week_task, "SUCCESS");
 
             if(duration_task == null || hour_task == null || date_task == null) {
                 Toast.makeText(this, "Veuillez remplir tous les champs.", Toast.LENGTH_SHORT).show();
