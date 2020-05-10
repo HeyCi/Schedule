@@ -1,6 +1,6 @@
 package org.demo.schedule;
 
-public class Task {
+public class Task implements Comparable<Task> {
     private String name_task;
     private String duration;
     private String recurrence;
@@ -105,5 +105,10 @@ public class Task {
         this.childId = childId;
         this.dayOfTheWeek = dayOfTheWeek;
         this.date = date;
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        return getHour().compareTo(task.getHour());
     }
 }

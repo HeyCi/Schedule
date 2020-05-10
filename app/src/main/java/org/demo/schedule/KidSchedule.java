@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Locale;
 
 public class KidSchedule extends AppCompatActivity implements View.OnClickListener, OnTaskClickListener {
@@ -99,6 +100,7 @@ public class KidSchedule extends AppCompatActivity implements View.OnClickListen
                         task.setType(snapshot.child("type").getValue().toString());
                         taskList.add(task);
                     }
+                    Collections.sort(taskList);
                     adapter.notifyDataSetChanged();
                 }
             }
