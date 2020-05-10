@@ -97,8 +97,10 @@ public class KidTaskActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         if(view == btn_afinir) {
             bdd.CreateTaskFailed(task);
+            finish();
         } else if(view == btn_fini) {
             bdd.CreateTaskSuccess(task);
+            finish();
         }
     }
 }
