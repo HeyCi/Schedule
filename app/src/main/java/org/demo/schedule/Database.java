@@ -85,7 +85,7 @@ public class Database {
     }
 
     public void CreateTaskSuccess(Task task){
-        DatabaseReference taskRef = userRef.child(task.getChildId()).child("TaskSuccess").child(task.getName_task());
+        DatabaseReference taskRef = userRef.child(task.getChildId()+" "+task.getDate()).child("TaskSuccess").child(task.getName_task());
         taskRef.child("name_task").setValue(task.getName_task());
         taskRef.child("duration").setValue(task.getDuration());
         taskRef.child("recurrence").setValue(task.getRecurrence());
@@ -131,7 +131,7 @@ public class Database {
     }
 
     public void CreateTaskFailed(Task task){
-        DatabaseReference taskRef = userRef.child(task.getChildId()).child("TaskFailed").child(task.getName_task());
+        DatabaseReference taskRef = userRef.child(task.getChildId()+" "+task.getDate()).child("TaskFailed").child(task.getName_task());
         taskRef.child("name_task").setValue(task.getName_task());
         taskRef.child("duration").setValue(task.getDuration());
         taskRef.child("recurrence").setValue(task.getRecurrence());
